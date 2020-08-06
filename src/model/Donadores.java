@@ -1,4 +1,4 @@
 package model;
 
-public class Donadores {
+public class Donadores extends Personas {
 }
