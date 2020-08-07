@@ -1,15 +1,18 @@
 package model;
 
+import java.util.TreeSet;
+
 public class Provincias {
+
     private String nombreProv;
-    private Localidades localidad;
+    private int idProvincia;
 
     public Provincias() {
     }
 
-    public Provincias(String nombreProv, Localidades localidad) {
+    public Provincias(String nombreProv, int idProvincia) {
         this.nombreProv = nombreProv;
-        this.localidad = localidad;
+        this.idProvincia = idProvincia;
     }
 
     public String getNombreProv() {
@@ -20,11 +23,7 @@ public class Provincias {
         this.nombreProv = nombreProv;
     }
 
-    public Localidades getLocalidad() {
-        return localidad;
-    }
+    public int getIdProvincia() { return idProvincia; }
 
-    public void setLocalidad(Localidades localidad) {
-        this.localidad = localidad;
-    }
+    public void setIdProvincia(int idProvincia) { this.idProvincia = idProvincia; }
 }

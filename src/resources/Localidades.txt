@@ -1,2 +1,2 @@
-C CABA            1429      NUÑEZ
-B BUENOS AIRES    1664      MANUEL ALBERTI
+ C  01    1429               NUÑEZ
+ B  02    1664      MANUEL ALBERTI
