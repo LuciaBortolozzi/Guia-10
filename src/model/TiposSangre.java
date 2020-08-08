@@ -1,15 +1,25 @@
 package model;
 
 public class TiposSangre {
+    private int id;
     private String grupo;
     private String factor;
 
     public TiposSangre() {
     }
 
-    public TiposSangre(String grupo, String factor) {
+    public TiposSangre(int id, String grupo, String factor) {
+        this.id = id;
         this.grupo = grupo;
         this.factor = factor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGrupo() {

@@ -14,12 +14,12 @@ public class LocalidadesTXT {
 
     public static ArrayList<Localidades> bajarLocalidadesTXT(ArrayList<Provincias> provincias) {
 
-        ArrayList<Localidades> localidades = new ArrayList<>();
+        ArrayList<Localidades> localidades = new ArrayList<Localidades>();
         try {
             File archivo = new File( directorio + "Localidades.txt");
             if (archivo.exists()){
                 Scanner leerArchivoLocalidades = new Scanner(archivo);
-                ArrayList<String> localidadesST = new ArrayList<>();
+                ArrayList<String> localidadesST = new ArrayList<String>();
 
                 //Guardar contenido en String
                 while (leerArchivoLocalidades.hasNext()) {

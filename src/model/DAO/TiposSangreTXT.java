@@ -8,16 +8,17 @@ import java.util.Scanner;
 
 public class TiposSangreTXT {
 
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<TiposSangre> bajarTiposSangreTXT() {
 
-        ArrayList<TiposSangre> tiposSangre = new ArrayList<>();
+        ArrayList<TiposSangre> tiposSangre = new ArrayList<TiposSangre>();
         try {
             File archivo = new File( directorio + "TiposSangre.txt");
             if (archivo.exists()){
                 Scanner leerArchivoTiposSangre = new Scanner(archivo);
-                ArrayList<String> TiposSangreST = new ArrayList<>();
+                ArrayList<String> TiposSangreST = new ArrayList<String>();
 
                 //Guardar contenido en String
                 while (leerArchivoTiposSangre.hasNext()) {
@@ -28,10 +29,11 @@ public class TiposSangreTXT {
                 // Guardar objetos
                 for (String s : TiposSangreST) {
 
-                    String grupo = s.substring(0,2);
-                    String factor = s.substring(2,10);
+                    int id = Integer.parseInt(s.substring(0,2));
+                    String grupo = s.substring(2,4);
+                    String factor = s.substring(4,12);
 
-                    tiposSangre.add(new TiposSangre(grupo,factor));
+                    tiposSangre.add(new TiposSangre(id, grupo,factor));
                 }
 
                 leerArchivoTiposSangre.close();

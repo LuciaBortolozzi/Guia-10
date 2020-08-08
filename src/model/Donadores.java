@@ -9,12 +9,14 @@ public class Donadores extends Personas {
     private boolean donaPlasma;
     private ArrayList<Extracciones> extracciones = new ArrayList<Extracciones>();
 
-    public Donadores(String nombre, String apellido, long dni, Provincias provincia, Calendar fechaNac, char sexo, TiposSangre tipoSangre, Hospital hospital) {
-        super(nombre, apellido, dni, provincia, fechaNac, sexo, tipoSangre, hospital);
+    public Donadores(boolean donaSangre, boolean donaPlaquetas, boolean donaPlasma) {
+        this.donaSangre = donaSangre;
+        this.donaPlaquetas = donaPlaquetas;
+        this.donaPlasma = donaPlasma;
     }
 
-    public Donadores(String nombre, String apellido, long dni, Provincias provincia, Calendar fechaNac, char sexo, TiposSangre tipoSangre, Hospital hospital, boolean donaSangre, boolean donaPlaquetas, boolean donaPlasma) {
-        super(nombre, apellido, dni, provincia, fechaNac, sexo, tipoSangre, hospital);
+    public Donadores(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre, Hospital hospital, boolean donaSangre, boolean donaPlaquetas, boolean donaPlasma) {
+        super(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre);
         this.donaSangre = donaSangre;
         this.donaPlaquetas = donaPlaquetas;
         this.donaPlasma = donaPlasma;
