@@ -4,6 +4,7 @@ import model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import static controller.Validaciones.convertirAFechaCalendar;
@@ -116,5 +117,67 @@ public class PersonasTXT {
             }
         }
         return hospital;
+    }
+
+    public static void grabarPersonasTXT(TreeSet<Personas> personas) {
+
+        try {
+            File fichero = new File(directorio + "Personas.txt");
+            Calendar fecha = Calendar.getInstance();
+
+            if (fichero.exists()) {
+                PrintWriter archivoSalida = new PrintWriter(fichero);
+
+                Personas persona;
+                Iterator<Personas> per = personas.iterator();
+                while (per.hasNext()) {
+                    persona = per.next();
+
+                    if (persona instanceof Pacientes) {
+
+                        archivoSalida.println( "1" + ";" +
+                                fecha.get(Calendar.DAY_OF_MONTH) + "/" +
+                                fecha.get(Calendar.MONTH) + "/" +
+                                fecha.get(Calendar.YEAR) + ";" +
+                                persona.getNombre() + ";" +
+                                persona.getApellido() + ";" +
+                                persona.getDni() + ";" +
+                                persona.getLocalidad().getNombreLoc() + ";" +
+                                persona.getFechaNac() + ";" +
+                                persona.getSexo() + ";" +
+                                persona.getTipoSangre().getId() + ";" +
+                                ((Pacientes)persona).getEnfermedad() + ";" +
+                                ((Pacientes)persona).getHospital().getIdHospital() + ";" +
+                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH) + "/" +
+                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.MONTH) + "/" +
+                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.YEAR)
+                        );
+
+                    }else if (persona instanceof Donadores) {
+
+                        archivoSalida.println( "2" + ";" +
+                                fecha.get(Calendar.DAY_OF_MONTH) + "/" +
+                                fecha.get(Calendar.MONTH) + "/" +
+                                fecha.get(Calendar.YEAR) + ";" +
+                                persona.getNombre() + ";" +
+                                persona.getApellido() + ";" +
+                                persona.getDni() + ";" +
+                                persona.getLocalidad().getNombreLoc() + ";" +
+                                persona.getFechaNac() + ";" +
+                                persona.getSexo() + ";" +
+                                persona.getTipoSangre() + ";" +
+                                ((Donadores)persona).isDonaSangre() + ";" +
+                                ((Donadores)persona).isDonaPlaquetas() + ";" +
+                                ((Donadores)persona).isDonaPlasma()
+                        );
+                    }
+                }
+
+                archivoSalida.close();
+            }
+
+        } catch (IOException e3) {
+            System.out.println("No se puede grabar el archivo de Personas.txt");
+        }
     }
 }
