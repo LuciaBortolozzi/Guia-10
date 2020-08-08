@@ -29,9 +29,9 @@ public class TiposSangreTXT {
                 // Guardar objetos
                 for (String s : TiposSangreST) {
 
-                    int id = Integer.parseInt(s.substring(0,2));
-                    String grupo = s.substring(2,4);
-                    String factor = s.substring(4,12);
+                    int id = Integer.parseInt(s.substring(0,2).trim());
+                    String grupo = s.substring(2,4).trim();
+                    String factor = s.substring(4,12).trim();
 
                     tiposSangre.add(new TiposSangre(id, grupo,factor));
                 }

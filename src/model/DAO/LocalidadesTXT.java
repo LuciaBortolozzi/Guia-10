@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class LocalidadesTXT {
 
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
+//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Localidades> bajarLocalidadesTXT(ArrayList<Provincias> provincias) {
 
@@ -30,10 +31,10 @@ public class LocalidadesTXT {
                 // Guardar objetos
                 for (String s : localidadesST) {
 
-                    String letraProvincia = s.substring(0,2);
-                    int codigoProvincia = Integer.parseInt(s.substring(2,6));
-                    String numeroPostal = s.substring(6,14);
-                    String nombreLocalidad = s.substring(14,35);
+                    String letraProvincia = s.substring(0,2).trim();
+                    int codigoProvincia = Integer.parseInt(s.substring(2,6).trim());
+                    String numeroPostal = s.substring(6,14).trim();
+                    String nombreLocalidad = s.substring(14,35).trim();
                     String codigoPostal = letraProvincia + numeroPostal;
 
                     Provincias provinciaAux = agregarProvincia(provincias, codigoProvincia);

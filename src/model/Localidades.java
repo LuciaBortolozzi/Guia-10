@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Localidades {
     private String nombreLoc;
     private String codigoPostal;

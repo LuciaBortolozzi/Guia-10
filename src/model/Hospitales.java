@@ -1,14 +1,14 @@
 package model;
 
-public class Hospital {
+public class Hospitales {
     private int idHospital;
     private String nombre;
     private String direccion;
 
-    public Hospital() {
+    public Hospitales() {
     }
 
-    public Hospital(int idHospital, String nombre, String direccion) {
+    public Hospitales(int idHospital, String nombre, String direccion) {
         this.idHospital = idHospital;
         this.nombre = nombre;
         this.direccion = direccion;
