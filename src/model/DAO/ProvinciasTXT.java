@@ -9,15 +9,16 @@ import java.util.Scanner;
 public class ProvinciasTXT {
 
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
+//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Provincias> bajarProvinciasTXT() {
 
-        ArrayList<Provincias> provincias = new ArrayList<>();
+        ArrayList<Provincias> provincias = new ArrayList<Provincias>();
         try {
             File archivo = new File( directorio + "Provincias.txt");
             if (archivo.exists()){
                 Scanner leerArchivoProvincias = new Scanner(archivo);
-                ArrayList<String> provinciasST = new ArrayList<>();
+                ArrayList<String> provinciasST = new ArrayList<String>();
 
                 //Guardar contenido en String
                 while (leerArchivoProvincias.hasNext()) {

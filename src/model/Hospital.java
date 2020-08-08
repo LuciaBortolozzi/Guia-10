@@ -1,15 +1,25 @@
 package model;
 
 public class Hospital {
+    private int idHospital;
     private String nombre;
     private String direccion;
 
     public Hospital() {
     }
 
-    public Hospital(String nombre, String direccion) {
+    public Hospital(int idHospital, String nombre, String direccion) {
+        this.idHospital = idHospital;
         this.nombre = nombre;
         this.direccion = direccion;
+    }
+
+    public int getIdHospital() {
+        return idHospital;
+    }
+
+    public void setIdHospital(int idHospital) {
+        this.idHospital = idHospital;
     }
 
     public String getNombre() {

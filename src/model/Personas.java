@@ -6,24 +6,22 @@ public class Personas {
     protected String nombre;
     protected String apellido;
     protected long dni;
-    protected Provincias provincia;
+    protected Localidades localidad;
     protected Calendar fechaNac;
     protected char sexo;
     protected TiposSangre tipoSangre;
-    protected Hospital hospital;
 
     public Personas() {
     }
 
-    public Personas(String nombre, String apellido, long dni, Provincias provincia, Calendar fechaNac, char sexo, TiposSangre tipoSangre, Hospital hospital) {
+    public Personas(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.provincia = provincia;
+        this.localidad = localidad;
         this.fechaNac = fechaNac;
         this.sexo = sexo;
         this.tipoSangre = tipoSangre;
-        this.hospital = hospital;
     }
 
     public String getNombre() {
@@ -50,12 +48,12 @@ public class Personas {
         this.dni = dni;
     }
 
-    public Provincias getProvincia() {
-        return provincia;
+    public Localidades getLocalidad() {
+        return localidad;
     }
 
-    public void setProvincia(Provincias provincia) {
-        this.provincia = provincia;
+    public void setLocalidad(Localidades localidad) {
+        this.localidad = localidad;
     }
 
     public Calendar getFechaNac() {
@@ -80,13 +78,5 @@ public class Personas {
 
     public void setTipoSangre(TiposSangre tipoSangre) {
         this.tipoSangre = tipoSangre;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
     }
 }
