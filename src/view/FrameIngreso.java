@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /*La pantalla gráfica para el ingreso de la misma debe incluir:
 
@@ -128,14 +130,14 @@ public class FrameIngreso {
         ventana.add(radioButtonPaciente);
         ventana.add(radioButtonDonador);
 
-        // Donador  (agregar itemListener)
+        // Donador
 
         ventana.add(labelDonacion);
         ventana.add(boxSangre);
         ventana.add(boxPlaquetas);
         ventana.add(boxPlasma);
 
-        // Paciente (agregar itemListener)
+        // Paciente
 
         ventana.add(labelInicioTratamiento);
         ventana.add(textInicioTratamiento);
@@ -145,6 +147,46 @@ public class FrameIngreso {
         ventana.add(listMedicamentos);
         ventana.add(buttonCopiar);
         ventana.add(listMedicamentosAux);
+
+        ItemListener itemListener = new ItemListener() {
+
+            public void itemStateChanged(ItemEvent e){
+
+                if (radioButtonDonador.isSelected()){
+                    if (e.getStateChange() ==  ItemEvent.SELECTED) {
+                        labelDonacion.setVisible(true);
+                        boxSangre.setVisible(true);
+                        boxPlaquetas.setVisible(true);
+                        boxPlasma.setVisible(true);
+
+                        labelInicioTratamiento.setVisible(false);
+                        textInicioTratamiento.setVisible(false);
+                        labelEnfermedad.setVisible(false);
+                        textEnfermedad.setVisible(false);
+                        labelMedicamentos.setVisible(false);
+                        listMedicamentos.setVisible(false);
+                        buttonCopiar.setVisible(false);
+                        listMedicamentosAux.setVisible(false);
+                    }
+                } else if (radioButtonPaciente.isSelected()){
+                    labelInicioTratamiento.setVisible(true);
+                    textInicioTratamiento.setVisible(true);
+                    labelEnfermedad.setVisible(true);
+                    textEnfermedad.setVisible(true);
+                    labelMedicamentos.setVisible(true);
+                    listMedicamentos.setVisible(true);
+                    buttonCopiar.setVisible(true);
+                    listMedicamentosAux.setVisible(true);
+
+                    labelDonacion.setVisible(false);
+                    boxSangre.setVisible(false);
+                    boxPlaquetas.setVisible(false);
+                    boxPlasma.setVisible(false);
+                }
+            }
+        };
+        radioButtonDonador.addItemListener(itemListener);
+        radioButtonPaciente.addItemListener(itemListener);
 
         // Abajo
         ventana.add(buttonAgregar);
