@@ -14,7 +14,7 @@ public class PersonasTXT {
 //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
-    public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre, ArrayList<Hospitales> hospitales) {
+    public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre, ArrayList<Medicamentos> medicamentos) {
 
         TreeSet<Personas> personas = new TreeSet<Personas>();
         try {
@@ -46,10 +46,13 @@ public class PersonasTXT {
 
                     if (tipo == 1) {
                         String enfermedad = personaST[9].toUpperCase().trim();
-                        Hospitales hospital = agregarHospital(hospitales, Integer.parseInt(personaST[10].trim()));
+
+                        ArrayList<Medicamentos> meds = null;
+//                                agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
+
                         Calendar inicioTratamiento = convertirAFechaCalendar(personaST[11].trim());
 
-                        personas.add(new Pacientes(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, enfermedad, hospital, inicioTratamiento));
+                        personas.add(new Pacientes(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, enfermedad, meds, inicioTratamiento));
 
                     } else if (tipo == 2) {
                         boolean donaSangre = Boolean.parseBoolean(personaST[9].trim());
@@ -104,20 +107,21 @@ public class PersonasTXT {
         return tipoSangre;
     }
 
-    public static Hospitales agregarHospital(ArrayList<Hospitales> hospitales, int idHospital) {
+/*    public static Medicamentos agregarMedicamentos(ArrayList<Medicamentos> medicamentos, int idMed) {
 
-        Hospitales hospital = null;
+        // Arraylist Medicamentos.txt!!
+        Medicamentos medicamento = null;
 
-        Iterator<Hospitales> hosp = hospitales.iterator();
+        Iterator<Medicamentos> hosp = medicamentos.iterator();
         while (hosp.hasNext()) {
-            hospital = hosp.next();
+            medicamento = hosp.next();
 
-            if (hospital.getIdHospital() == idHospital) {
+            if (medicamento.getIdMed() == idMed) {
                 break;
             }
         }
-        return hospital;
-    }
+        return medicamento;
+    }*/
 
     public static void grabarPersonasTXT(TreeSet<Personas> personas) {
 
@@ -147,7 +151,7 @@ public class PersonasTXT {
                                 persona.getSexo() + ";" +
                                 persona.getTipoSangre().getId() + ";" +
                                 ((Pacientes)persona).getEnfermedad() + ";" +
-                                ((Pacientes)persona).getHospital().getIdHospital() + ";" +
+                                //Medicamentos.txt
                                 ((Pacientes)persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH) + "/" +
                                 ((Pacientes)persona).getInicioTratamiento().get(Calendar.MONTH) + "/" +
                                 ((Pacientes)persona).getInicioTratamiento().get(Calendar.YEAR)
