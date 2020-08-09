@@ -1,22 +1,23 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Pacientes extends Personas {
     private String enfermedad;
-    private Hospitales hospital;
+    private ArrayList<Medicamentos> medicamentos;
     private Calendar inicioTratamiento;
 
-    public Pacientes(String enfermedad, Hospitales hospital, Calendar inicioTratamiento) {
+    public Pacientes(String enfermedad, ArrayList<Medicamentos> medicamentos, Calendar inicioTratamiento) {
         this.enfermedad = enfermedad;
-        this.hospital = hospital;
+        this.medicamentos = medicamentos;
         this.inicioTratamiento = inicioTratamiento;
     }
 
-    public Pacientes(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre, String enfermedad, Hospitales hospital, Calendar inicioTratamiento) {
+    public Pacientes(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre, String enfermedad, ArrayList<Medicamentos> medicamentos, Calendar inicioTratamiento) {
         super(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre);
         this.enfermedad = enfermedad;
-        this.hospital = hospital;
+        this.medicamentos = medicamentos;
         this.inicioTratamiento = inicioTratamiento;
     }
 
@@ -28,12 +29,12 @@ public class Pacientes extends Personas {
         this.inicioTratamiento = inicioTratamiento;
     }
 
-    public Hospitales getHospital() {
-        return hospital;
+    public ArrayList<Medicamentos> getMedicamentos() {
+        return medicamentos;
     }
 
-    public void setHospital(Hospitales hospital) {
-        this.hospital = hospital;
+    public void setMedicamentos(ArrayList<Medicamentos> medicamentos) {
+        this.medicamentos = medicamentos;
     }
 
     public String getEnfermedad() {
