@@ -30,9 +30,9 @@ public class MedicamentosTXT {
                 // Guardar objetos
                 for (String s : medicamentosST) {
 
-                    int idMed = Integer.parseInt(s.substring(0,5).trim());
-                    String nombreMed = s.substring(5,33).trim();
-                    String nombreLab = s.substring(33,58).trim();
+                    int idMed = Integer.parseInt(s.substring(0,10).trim());
+                    String nombreMed = s.substring(10,58).trim();
+                    String nombreLab = s.substring(58,80).trim();
 
                     medicamentos.add(new Medicamentos(idMed, nombreMed, nombreLab));
                 }

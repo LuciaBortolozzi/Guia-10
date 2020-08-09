@@ -16,7 +16,7 @@ public class FrameMenuCtrl implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == frameMenu.getSubopcion1()) {
-            JOptionPane.showMessageDialog(null, "SUBOPCION1", "SUBOPCION1", JOptionPane.INFORMATION_MESSAGE);
+            new FrameIngresoCtrl();
         } else if (e.getSource() == frameMenu.getSubopcion2()) {
             JOptionPane.showMessageDialog(null, "SUBOPCION2", "SUBOPCION2", JOptionPane.INFORMATION_MESSAGE);
 

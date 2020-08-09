@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controlador;
+import controller.FrameIngresoCtrl;
 import controller.FrameMenuCtrl;
 import model.Medicamentos;
 import model.Localidades;
@@ -75,7 +76,7 @@ public class FrameIngreso {
     private JButton buttonCopiar;
     private JScrollPane scrollPane, scrollPaneAux;
 
-    public FrameIngreso(FrameMenuCtrl frameMenuCtrl) {
+    public FrameIngreso(FrameIngresoCtrl frameIngresoCtrl) {
         ventana.setSize(300, 500);
         ventana.setLayout(new GridLayout());
 
@@ -85,7 +86,7 @@ public class FrameIngreso {
             }
         });
 
-        buttonAgregar.addActionListener(frameMenuCtrl);
+        buttonAgregar.addActionListener(frameIngresoCtrl);
 
         //comboLocalidades = new JComboBox((ComboBoxModel) localidadesST);
         comboLocalidades = new JComboBox(Controlador.stringifyLocalidades().toArray());
