@@ -47,7 +47,8 @@ public class PersonasTXT {
                     if (tipo == 1) {
                         String enfermedad = personaST[9].toUpperCase().trim();
 
-                        ArrayList<Medicamentos> meds = null;
+                        ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
+
 //                                agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
 
                         Calendar inicioTratamiento = convertirAFechaCalendar(personaST[11].trim());
@@ -109,7 +110,7 @@ public class PersonasTXT {
 
 /*    public static Medicamentos agregarMedicamentos(ArrayList<Medicamentos> medicamentos, int idMed) {
 
-        // Arraylist Medicamentos.txt!!
+        // PacientesMedicamentos.txt!!
         Medicamentos medicamento = null;
 
         Iterator<Medicamentos> hosp = medicamentos.iterator();
