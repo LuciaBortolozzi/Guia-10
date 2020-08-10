@@ -79,8 +79,9 @@ public class FrameIngreso {
     private JScrollPane scrollPane, scrollPaneAux;
 
     public FrameIngreso(FrameIngresoCtrl frameIngresoCtrl) {
-        ventana.setSize(300, 500);
-        ventana.setLayout(new GridLayout());
+        ventana.setSize(400, 600);
+        ventana.setLayout(new FlowLayout());
+        //ventana.setLayout(new GridLayout(15,1));
 
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -90,15 +91,21 @@ public class FrameIngreso {
 
         buttonAgregar.addActionListener(frameIngresoCtrl);
 
-        //comboLocalidades = new JComboBox((ComboBoxModel) localidadesST);
-        comboLocalidades = new JComboBox(Controlador.stringifyLocalidades().toArray());
-        comboLocalidades.setMaximumRowCount(8);
+        frameIngresoCtrl.setVista(this);
+        comboProvincias.addItemListener(frameIngresoCtrl);
+        comboProvincias.addActionListener(frameIngresoCtrl);
+        comboLocalidades.addActionListener(frameIngresoCtrl);
+  /*
 
-//        comboProvincias = new JComboBox((ComboBoxModel) provinciasST);
+        //comboLocalidades = new JComboBox((ComboBoxModel) localidadesST);
+        comboLocalidades = new JComboBox(Controlador.stringifyLocalidades(comboProvincias.getSelectedIndex()).toArray());
+        comboLocalidades.setMaximumRowCount(8);
+        
+        //comboProvincias = new JComboBox((ComboBoxModel) provinciasST);
         comboProvincias = new JComboBox(Controlador.stringifyProvincias().toArray());
         comboProvincias.setMaximumRowCount(8);
-
-//        comboTiposSangre = new JComboBox((ComboBoxModel) tiposDeSangreST);
+*/
+        //comboTiposSangre = new JComboBox((ComboBoxModel) tiposDeSangreST);
         comboTiposSangre = new JComboBox(Controlador.stringifyTiposSangres().toArray());
         comboTiposSangre.setMaximumRowCount(8);
 
@@ -145,8 +152,9 @@ public class FrameIngreso {
         ventana.add(textEnfermedad);
         ventana.add(labelMedicamentos);
         ventana.add(listMedicamentos);
-        ventana.add(buttonCopiar);
+       // ventana.add(buttonCopiar);
         ventana.add(listMedicamentosAux);
+
 
         ItemListener itemListener = new ItemListener() {
 

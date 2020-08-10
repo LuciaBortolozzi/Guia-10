@@ -34,7 +34,7 @@ public class LocalidadesTXT {
                     String letraProvincia = s.substring(0,2).trim();
                     int codigoProvincia = Integer.parseInt(s.substring(2,6).trim());
                     String numeroPostal = s.substring(6,14).trim();
-                    String nombreLocalidad = s.substring(14,35).trim();
+                    String nombreLocalidad = s.substring(14,34).trim();
                     String codigoPostal = letraProvincia + numeroPostal;
 
                     Provincias provinciaAux = agregarProvincia(provincias, codigoProvincia);

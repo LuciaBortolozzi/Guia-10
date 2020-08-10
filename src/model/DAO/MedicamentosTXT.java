@@ -32,7 +32,7 @@ public class MedicamentosTXT {
 
                     int idMed = Integer.parseInt(s.substring(0,10).trim());
                     String nombreMed = s.substring(10,58).trim();
-                    String nombreLab = s.substring(58,80).trim();
+                    String nombreLab = s.substring(58,83).trim();
 
                     medicamentos.add(new Medicamentos(idMed, nombreMed, nombreLab));
                 }

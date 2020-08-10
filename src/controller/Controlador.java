@@ -15,12 +15,17 @@ public class Controlador {
     static ArrayList<Medicamentos> medicamentos = MedicamentosTXT.bajarMedicamentosTXT();
 
 //    static TreeSet<Personas> personas = PersonasTXT.bajarPersonasTXT(localidades, tiposSangres, medicamentos);
-
-    public static ArrayList<String> stringifyLocalidades() {
+/*
+    public static ArrayList<String> stringifyLocalidades(int Codprovincia) {
 
         ArrayList<String> localidadesST = new ArrayList<String>();
         for (Localidades loc : localidades) {
-            localidadesST.add(loc.getNombreLoc());
+
+            if(Codprovincia == loc.getProvincia().getIdProvincia()){
+
+                localidadesST.add(loc.getNombreLoc());
+            }
+
         }
         return localidadesST;
     }
@@ -33,7 +38,7 @@ public class Controlador {
         }
         return provinciasST;
     }
-
+*/
     public static ArrayList<String> stringifyTiposSangres() {
 
         ArrayList<String> tiposSangresST = new ArrayList<String>();

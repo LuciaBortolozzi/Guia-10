@@ -29,8 +29,8 @@ public class ProvinciasTXT {
                 // Guardar objetos
                 for (String s : provinciasST) {
 
-                    int codigoProvincia = Integer.parseInt(s.substring(0,2).trim());
-                    String nombreProvincia = s.substring(2,23).trim();
+                    int codigoProvincia = Integer.parseInt(s.substring(0,3).trim());
+                    String nombreProvincia = s.substring(3,23).trim();
 
                     provincias.add(new Provincias(nombreProvincia,codigoProvincia));
                 }
