@@ -1,12 +1,6 @@
 package view;
 
-import controller.Controlador;
 import controller.FrameIngresoCtrl;
-import controller.FrameMenuCtrl;
-import model.Medicamentos;
-import model.Localidades;
-import model.Provincias;
-import model.TiposSangre;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,13 +69,13 @@ public class FrameIngreso {
     private JButton buttonAgregar = new JButton("Aceptar");
     private JButton buttonCancelar = new JButton("Cancelar");
 
-    private JButton buttonCopiar;
+    private JButton buttonCopiar = new JButton(">>>>");
+    ;
     private JScrollPane scrollPane, scrollPaneAux;
 
     public FrameIngreso(FrameIngresoCtrl frameIngresoCtrl) {
         ventana.setSize(400, 600);
         ventana.setLayout(new FlowLayout());
-        //ventana.setLayout(new GridLayout(15,1));
 
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -95,18 +89,9 @@ public class FrameIngreso {
         comboProvincias.addItemListener(frameIngresoCtrl);
         comboProvincias.addActionListener(frameIngresoCtrl);
         comboLocalidades.addActionListener(frameIngresoCtrl);
-  /*
 
-        //comboLocalidades = new JComboBox((ComboBoxModel) localidadesST);
-        comboLocalidades = new JComboBox(Controlador.stringifyLocalidades(comboProvincias.getSelectedIndex()).toArray());
-        comboLocalidades.setMaximumRowCount(8);
-        
-        //comboProvincias = new JComboBox((ComboBoxModel) provinciasST);
-        comboProvincias = new JComboBox(Controlador.stringifyProvincias().toArray());
-        comboProvincias.setMaximumRowCount(8);
-*/
         //comboTiposSangre = new JComboBox((ComboBoxModel) tiposDeSangreST);
-        comboTiposSangre = new JComboBox(Controlador.stringifyTiposSangres().toArray());
+        comboTiposSangre = new JComboBox(frameIngresoCtrl.stringifyTiposSangres().toArray());
         comboTiposSangre.setMaximumRowCount(8);
 
         textArea.setEditable(false);
@@ -152,16 +137,16 @@ public class FrameIngreso {
         ventana.add(textEnfermedad);
         ventana.add(labelMedicamentos);
         ventana.add(listMedicamentos);
-       // ventana.add(buttonCopiar);
+        ventana.add(buttonCopiar);
         ventana.add(listMedicamentosAux);
 
 
         ItemListener itemListener = new ItemListener() {
 
-            public void itemStateChanged(ItemEvent e){
+            public void itemStateChanged(ItemEvent e) {
 
-                if (radioButtonDonador.isSelected()){
-                    if (e.getStateChange() ==  ItemEvent.SELECTED) {
+                if (radioButtonDonador.isSelected()) {
+                    if (e.getStateChange() == ItemEvent.SELECTED) {
                         labelDonacion.setVisible(true);
                         boxSangre.setVisible(true);
                         boxPlaquetas.setVisible(true);
@@ -176,7 +161,7 @@ public class FrameIngreso {
                         buttonCopiar.setVisible(false);
                         listMedicamentosAux.setVisible(false);
                     }
-                } else if (radioButtonPaciente.isSelected()){
+                } else if (radioButtonPaciente.isSelected()) {
                     labelInicioTratamiento.setVisible(true);
                     textInicioTratamiento.setVisible(true);
                     labelEnfermedad.setVisible(true);
@@ -199,6 +184,7 @@ public class FrameIngreso {
         // Abajo
         ventana.add(buttonAgregar);
         ventana.add(buttonCancelar);
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 

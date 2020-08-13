@@ -15,38 +15,6 @@ public class Controlador {
     static ArrayList<Medicamentos> medicamentos = MedicamentosTXT.bajarMedicamentosTXT();
 
 //    static TreeSet<Personas> personas = PersonasTXT.bajarPersonasTXT(localidades, tiposSangres, medicamentos);
-/*
-    public static ArrayList<String> stringifyLocalidades(int Codprovincia) {
-
-        ArrayList<String> localidadesST = new ArrayList<String>();
-        for (Localidades loc : localidades) {
-
-            if(Codprovincia == loc.getProvincia().getIdProvincia()){
-
-                localidadesST.add(loc.getNombreLoc());
-            }
-
-        }
-        return localidadesST;
-    }
-
-    public static ArrayList<String> stringifyProvincias() {
-
-        ArrayList<String> provinciasST = new ArrayList<String>();
-        for (Provincias prov : provincias) {
-            provinciasST.add(prov.getNombreProv());
-        }
-        return provinciasST;
-    }
-*/
-    public static ArrayList<String> stringifyTiposSangres() {
-
-        ArrayList<String> tiposSangresST = new ArrayList<String>();
-        for (TiposSangre tipo : tiposSangres) {
-            tiposSangresST.add(tipo.getGrupo() + tipo.getFactor());
-        }
-        return tiposSangresST;
-    }
 
     public static ArrayList<String> stringifyMedicamentos() {
 

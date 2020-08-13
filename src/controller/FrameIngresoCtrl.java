@@ -1,9 +1,8 @@
 package controller;
 
-import model.DAO.LocalidadesTXT;
-import model.DAO.ProvinciasTXT;
 import model.Localidades;
 import model.Provincias;
+import model.TiposSangre;
 import view.FrameIngreso;
 
 import java.awt.event.ActionEvent;
@@ -13,10 +12,9 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrameIngresoCtrl implements ActionListener, ItemListener {
+import static controller.Controlador.*;
 
-    static ArrayList<Provincias> provincias = ProvinciasTXT.bajarProvinciasTXT();
-    static ArrayList<Localidades> localidades = LocalidadesTXT.bajarLocalidadesTXT(provincias);
+public class FrameIngresoCtrl implements ActionListener, ItemListener {
 
     private FrameIngreso vista;
 
@@ -39,21 +37,30 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
 
 
         vista.getComboProvincias().addItem("Seleccione una Provincia");
-        for(Provincias pro:provincias){
-        vista.getComboProvincias().addItem(pro.getNombreProv());
+        for (Provincias pro : provincias) {
+            vista.getComboProvincias().addItem(pro.getNombreProv());
 
         }
         this.vista = vista;
 
     }
 
-    public List<String> getLocalidadesxProvincia (String marcaSeleccionada) {
+    public static ArrayList<String> stringifyTiposSangres() {
 
-        List<String> STLocalidades= new ArrayList();
+        ArrayList<String> tiposSangresST = new ArrayList<String>();
+        for (TiposSangre tipo : tiposSangres) {
+            tiposSangresST.add(tipo.getGrupo() + tipo.getFactor());
+        }
+        return tiposSangresST;
+    }
+
+    public List<String> getLocalidadesxProvincia(String provSeleccionada) {
+
+        List<String> STLocalidades = new ArrayList();
 
         for (Localidades loc : localidades) {
-            if (loc!=null) {
-                if (loc.getProvincia().getNombreProv().equals(marcaSeleccionada)) {
+            if (loc != null) {
+                if (loc.getProvincia().getNombreProv().equals(provSeleccionada)) {
 
                     STLocalidades.add(loc.getNombreLoc());
 
@@ -66,30 +73,28 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
 
     public void itemStateChanged(ItemEvent o) {
         String provinciaSeleccionada;
-        List <String> STLocalidades;
+        List<String> STLocalidades;
         if (o.getSource() == vista.getComboProvincias()) {  // AGREGUE ESTO
-            if (o.getStateChange()== ItemEvent.SELECTED)
-            {
-                if (vista.getComboProvincias().getSelectedIndex()>0)
-                {
+            if (o.getStateChange() == ItemEvent.SELECTED) {
+                if (vista.getComboProvincias().getSelectedIndex() > 0) {
                     provinciaSeleccionada = vista.getComboProvincias().getSelectedItem().toString();
 
                     vista.getComboLocalidades().removeAllItems();
                     vista.getComboLocalidades().addItem("Seleccione una localidad");
 
                     STLocalidades = getLocalidadesxProvincia(provinciaSeleccionada);
-                    String[] modelosPorMarca = new String [STLocalidades.size()];
-                    modelosPorMarca = STLocalidades.toArray(modelosPorMarca);
+                    String[] locPorProvincia = new String[STLocalidades.size()];
+                    locPorProvincia = STLocalidades.toArray(locPorProvincia);
 
-                    for (int i=0; i<modelosPorMarca.length; i++)
-                    {
-                        vista.getComboLocalidades().addItem(modelosPorMarca[i]);
+                    for (int i = 0; i < locPorProvincia.length; i++) {
+                        vista.getComboLocalidades().addItem(locPorProvincia[i]);
 
                     }
                     vista.getLabelLocalidad().setVisible(true);
                     vista.getComboLocalidades().setVisible(true);
                 }
-            }}
+            }
+        }
 
     }
 
