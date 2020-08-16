@@ -37,6 +37,7 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
 
 
         vista.getComboProvincias().addItem("Seleccione una Provincia");
+        vista.getComboLocalidades().addItem("Seleccione una localidad");
         for (Provincias pro : provincias) {
             vista.getComboProvincias().addItem(pro.getNombreProv());
 
@@ -49,7 +50,7 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
 
         ArrayList<String> tiposSangresST = new ArrayList<String>();
         for (TiposSangre tipo : tiposSangres) {
-            tiposSangresST.add(tipo.getGrupo() + tipo.getFactor());
+            tiposSangresST.add(tipo.getGrupo() + " RH " + tipo.getFactor());
         }
         return tiposSangresST;
     }
@@ -74,7 +75,7 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
     public void itemStateChanged(ItemEvent o) {
         String provinciaSeleccionada;
         List<String> STLocalidades;
-        if (o.getSource() == vista.getComboProvincias()) {  // AGREGUE ESTO
+        if (o.getSource() == vista.getComboProvincias()) {
             if (o.getStateChange() == ItemEvent.SELECTED) {
                 if (vista.getComboProvincias().getSelectedIndex() > 0) {
                     provinciaSeleccionada = vista.getComboProvincias().getSelectedItem().toString();
@@ -92,6 +93,10 @@ public class FrameIngresoCtrl implements ActionListener, ItemListener {
                     }
                     vista.getLabelLocalidad().setVisible(true);
                     vista.getComboLocalidades().setVisible(true);
+                } else if (vista.getComboProvincias().getSelectedIndex() == 0) {
+
+                    vista.getComboLocalidades().removeAllItems();
+                    vista.getComboLocalidades().addItem("Seleccione una localidad");
                 }
             }
         }

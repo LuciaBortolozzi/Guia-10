@@ -18,8 +18,7 @@ public class FrameMenuCtrl implements ActionListener {
         if (e.getSource() == frameMenu.getSubopcion1()) {
             new FrameIngresoCtrl();
         } else if (e.getSource() == frameMenu.getSubopcion2()) {
-            JOptionPane.showMessageDialog(null, "SUBOPCION2", "SUBOPCION2", JOptionPane.INFORMATION_MESSAGE);
-
+            new FrameConsultaActCtrl();
         } else if (e.getSource() == frameMenu.getSubopcion3()) {
             JOptionPane.showMessageDialog(null, "SUBOPCION3", "SUBOPCION3", JOptionPane.INFORMATION_MESSAGE);
 

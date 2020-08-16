@@ -22,7 +22,30 @@ import java.awt.event.ItemListener;
 public class FrameIngreso {
 
     private JFrame ventana = new JFrame("Ingreso personas");
-    private JPanel contentPanel = new JPanel();
+    private JPanel panelPie = new JPanel();
+    private JPanel panelCabecera = new JPanel();
+    private JPanel panelCenter = new JPanel();
+    private JPanel panelCenterLeft = new JPanel();
+    private JPanel panelNombre = new JPanel();
+    private JPanel panelApellido = new JPanel();
+    private JPanel panelDNI = new JPanel();
+    private JPanel panelNacimiento = new JPanel();
+    private JPanel panelCenterRight = new JPanel();
+    private JPanel panelSexo = new JPanel();
+    private JPanel panelTipoSangre = new JPanel();
+    private JPanel panelProvincia = new JPanel();
+    private JPanel panelLocalidad = new JPanel();
+    private JPanel panelPersona = new JPanel();
+    private JPanel panelDonador = new JPanel();
+    private JPanel panelDonador2 = new JPanel();
+    private JPanel panelPaciente = new JPanel();
+    private JPanel panelPaciente2 = new JPanel();
+    private JPanel panelPaciente3= new JPanel();
+    private JPanel panelUp= new JPanel();
+    private JPanel panelDown= new JPanel();
+    private JPanel panelMedicina = new JPanel();
+    private JPanel panelMedicina2 = new JPanel();
+    private JPanel panelPepe = new JPanel();
 
     private JTextArea textArea = new JTextArea("Complete con los datos de personas\n" + "sarasa\n" + "sarasa\n");
 
@@ -34,7 +57,7 @@ public class FrameIngreso {
     private JLabel labelLocalidad = new JLabel("Localidad");
     private JLabel labelProvincia = new JLabel("Provincia");
     private JLabel labelTipoSangre = new JLabel("Tipo de Sangre");
-    private JLabel labelPersona = new JLabel("Paciente o Donador");
+    private JLabel labelPersona = new JLabel("Condición:");
     private JLabel labelInicioTratamiento = new JLabel("Fecha de inicio de Tratamiento");
     private JLabel labelEnfermedad = new JLabel("Enfermedad");
     private JLabel labelMedicamentos = new JLabel("Medicamentos");
@@ -45,7 +68,7 @@ public class FrameIngreso {
     private JTextField textDNI = new JTextField(20);
     private JTextField textFechaNac = new JTextField(8);
     private JTextField textInicioTratamiento = new JTextField(8);
-    private JTextField textEnfermedad = new JTextField(50);
+    private JTextField textEnfermedad = new JTextField(20);
 
     private JRadioButton radioButtonMasc = new JRadioButton("Masculino");
     private JRadioButton radioButtonFem = new JRadioButton("Femenino");
@@ -58,6 +81,8 @@ public class FrameIngreso {
     private JCheckBox boxSangre = new JCheckBox("Sangre");
     private JCheckBox boxPlaquetas = new JCheckBox("Plaquetas");
     private JCheckBox boxPlasma = new JCheckBox("Plasma");
+
+    private JButton buttonExtraccion = new JButton("Nueva Extraccion");
 
     private JComboBox<String> comboLocalidades = new JComboBox<String>();
     private JComboBox<String> comboProvincias = new JComboBox<String>();
@@ -74,8 +99,8 @@ public class FrameIngreso {
     private JScrollPane scrollPane, scrollPaneAux;
 
     public FrameIngreso(FrameIngresoCtrl frameIngresoCtrl) {
-        ventana.setSize(400, 600);
-        ventana.setLayout(new FlowLayout());
+        ventana.setSize(650, 650);
+        //ventana.setLayout(new GridLayout(30,1));
 
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +109,8 @@ public class FrameIngreso {
         });
 
         buttonAgregar.addActionListener(frameIngresoCtrl);
+
+        buttonExtraccion.addActionListener(frameIngresoCtrl);
 
         frameIngresoCtrl.setVista(this);
         comboProvincias.addItemListener(frameIngresoCtrl);
@@ -95,50 +122,107 @@ public class FrameIngreso {
         comboTiposSangre.setMaximumRowCount(8);
 
         textArea.setEditable(false);
-        ventana.add(textArea);
-        ventana.add(labelNombre);
-        ventana.add(textNombre);
-        ventana.add(labelApellido);
-        ventana.add(textApellido);
-        ventana.add(labelDNI);
-        ventana.add(textDNI);
-        ventana.add(labelFechaNac);
-        ventana.add(textFechaNac);
-        ventana.add(labelSexo);
+        panelCabecera.add(textArea);
+        ventana.add(panelCabecera,BorderLayout.NORTH);
+
+        //panelCenter.setLayout(new GridLayout(1,2));
+        panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
+        panelUp.setLayout(new GridLayout(1,2));
+        panelNombre.setLayout(new GridLayout(2,1));
+        panelNombre.add(labelNombre);
+        panelNombre.add(textNombre);
+        panelCenterLeft.add(panelNombre);
+
+        panelSexo.add(labelSexo);
         groupSexo.add(radioButtonFem);
         groupSexo.add(radioButtonMasc);
-        ventana.add(radioButtonFem);
-        ventana.add(radioButtonMasc);
-        ventana.add(labelTipoSangre);
-        ventana.add(comboTiposSangre);
-        ventana.add(labelProvincia);
-        ventana.add(comboProvincias);
-        ventana.add(labelLocalidad);
-        ventana.add(comboLocalidades);
+        panelSexo.add(radioButtonFem);
+        panelSexo.add(radioButtonMasc);
+        panelCenterRight.add(panelSexo);
 
-        ventana.add(labelPersona);
+        panelApellido.setLayout(new GridLayout(2,1));
+        panelApellido.add(labelApellido);
+        panelApellido.add(textApellido);
+        panelCenterLeft.add(panelApellido);
+
+        panelTipoSangre.add(labelTipoSangre);
+        panelTipoSangre.add(comboTiposSangre);
+        panelCenterRight.add(panelTipoSangre);
+
+        panelDNI.setLayout(new GridLayout(2,1));
+        panelDNI.add(labelDNI);
+        panelDNI.add(textDNI);
+        panelCenterLeft.add(panelDNI);
+
+        panelProvincia.add(labelProvincia);
+        panelProvincia.add(comboProvincias);
+        panelCenterRight.add(panelProvincia);
+
+        panelNacimiento.setLayout(new GridLayout(2,1));
+        panelNacimiento.add(labelFechaNac);
+        panelNacimiento.add(textFechaNac);
+        panelCenterLeft.add(panelNacimiento);
+
+        panelLocalidad.add(labelLocalidad);
+        panelLocalidad.add(comboLocalidades);
+        panelCenterRight.add(panelLocalidad);
+
+        panelPersona.add(labelPersona);
         groupTipoPersona.add(radioButtonPaciente);
         groupTipoPersona.add(radioButtonDonador);
-        ventana.add(radioButtonPaciente);
-        ventana.add(radioButtonDonador);
+        panelPersona.add(radioButtonPaciente);
+        panelPersona.add(radioButtonDonador);
+        panelCenterLeft.add(panelPersona);
 
         // Donador
+        panelDonador.setLayout(new BoxLayout(panelDonador,BoxLayout.Y_AXIS));
+        panelDonador.add(labelDonacion);
+        panelDonador.add(boxSangre);
+        panelDonador.add(boxPlaquetas);
+        panelDonador.add(boxPlasma);
+        panelDonador2.add(buttonExtraccion);
+        panelCenterRight.add(panelDonador);
+        panelCenterLeft.add(panelDonador2);
 
-        ventana.add(labelDonacion);
-        ventana.add(boxSangre);
-        ventana.add(boxPlaquetas);
-        ventana.add(boxPlasma);
-
+        panelDown.setLayout(new GridLayout(2,1));
         // Paciente
+        panelPaciente.add(labelInicioTratamiento);
+        panelPaciente.add(textInicioTratamiento);
+        panelPaciente.add(labelEnfermedad);
+        panelPaciente.add(textEnfermedad);
+        //- - - - > VER ESTA PARTE QUE QUEDA PARA EL CULO
+        panelMedicina.add(labelMedicamentos);
+        panelMedicina2.setLayout(new FlowLayout());
+        panelMedicina2.add(listMedicamentos);
+        panelMedicina2.add(buttonCopiar);
+        panelMedicina2.add(listMedicamentosAux);
+        panelPepe.add(panelMedicina,BorderLayout.NORTH);
+        panelPepe.add(panelMedicina2,BorderLayout.SOUTH);
+        panelDown.add(panelPaciente);
+        panelDown.add(panelPepe);
+        //- - - - > VER ESTA PARTE QUE QUEDA PARA EL CULO
 
-        ventana.add(labelInicioTratamiento);
-        ventana.add(textInicioTratamiento);
-        ventana.add(labelEnfermedad);
-        ventana.add(textEnfermedad);
-        ventana.add(labelMedicamentos);
-        ventana.add(listMedicamentos);
-        ventana.add(buttonCopiar);
-        ventana.add(listMedicamentosAux);
+        panelUp.add(panelCenterLeft);
+        panelUp.add(panelCenterRight);
+        panelCenter.add(panelUp);
+        panelCenter.add(panelDown);
+
+        //indico que me muestre los datos de un solo radioButton
+        radioButtonFem.setSelected(true);
+        labelDonacion.setVisible(false);
+        boxSangre.setVisible(false);
+        boxPlaquetas.setVisible(false);
+        boxPlasma.setVisible(false);
+        buttonExtraccion.setVisible(false);
+        radioButtonPaciente.setSelected(true);
+        labelInicioTratamiento.setVisible(true);
+        textInicioTratamiento.setVisible(true);
+        labelEnfermedad.setVisible(true);
+        textEnfermedad.setVisible(true);
+        labelMedicamentos.setVisible(true);
+        listMedicamentos.setVisible(true);
+        buttonCopiar.setVisible(true);
+        listMedicamentosAux.setVisible(true);
 
 
         ItemListener itemListener = new ItemListener() {
@@ -151,6 +235,7 @@ public class FrameIngreso {
                         boxSangre.setVisible(true);
                         boxPlaquetas.setVisible(true);
                         boxPlasma.setVisible(true);
+                        buttonExtraccion.setVisible(true);
 
                         labelInicioTratamiento.setVisible(false);
                         textInicioTratamiento.setVisible(false);
@@ -175,6 +260,7 @@ public class FrameIngreso {
                     boxSangre.setVisible(false);
                     boxPlaquetas.setVisible(false);
                     boxPlasma.setVisible(false);
+                    buttonExtraccion.setVisible(false);
                 }
             }
         };
@@ -182,8 +268,11 @@ public class FrameIngreso {
         radioButtonPaciente.addItemListener(itemListener);
 
         // Abajo
-        ventana.add(buttonAgregar);
-        ventana.add(buttonCancelar);
+        panelPie.add(buttonAgregar);
+        panelPie.add(buttonCancelar);
+        ventana.add(panelPie,BorderLayout.SOUTH);
+        ventana.add(panelCenter,BorderLayout.CENTER);
+
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -214,14 +303,6 @@ public class FrameIngreso {
 
     public void setVentana(JFrame ventana) {
         this.ventana = ventana;
-    }
-
-    public JPanel getContentPanel() {
-        return contentPanel;
-    }
-
-    public void setContentPanel(JPanel contentPanel) {
-        this.contentPanel = contentPanel;
     }
 
     public JTextArea getTextArea() {
@@ -479,4 +560,8 @@ public class FrameIngreso {
     public void setScrollPaneAux(JScrollPane scrollPaneAux) {
         this.scrollPaneAux = scrollPaneAux;
     }
+
+    public JButton getButtonExtraccion() { return buttonExtraccion; }
+
+    public void setButtonExtraccion(JButton buttonExtraccion) { this.buttonExtraccion = buttonExtraccion; }
 }
