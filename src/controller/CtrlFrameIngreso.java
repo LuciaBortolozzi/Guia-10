@@ -27,6 +27,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             Controlador.ingresarPersona(vista);
 
             vista.limpiar(false);
+
         } else if (e.getSource() == vista.getButtonCopiar()) {
             vista.getMedsAux().removeAllElements();
             List<String> lst = vista.getListMedicamentos().getSelectedValuesList();
@@ -76,6 +77,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
     public static ArrayList<String> stringifyTiposSangres() {
 
         ArrayList<String> tiposSangresST = new ArrayList<String>();
+        tiposSangresST.add("Seleccione tipo de sangre");
         for (TiposSangre tipo : tiposSangres) {
             tiposSangresST.add(tipo.getGrupo() + " RH " + tipo.getFactor());
         }

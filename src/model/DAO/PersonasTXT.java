@@ -11,10 +11,10 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
-    public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre, ArrayList<Medicamentos> medicamentos) {
+    public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre) {
 
         TreeSet<Personas> personas = new TreeSet<Personas>();
         try {
@@ -49,9 +49,9 @@ public class PersonasTXT {
 
                         ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
 
-//                                agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
+                        //agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
 
-                        Calendar inicioTratamiento = convertirAFechaCalendar(personaST[11].trim());
+                        Calendar inicioTratamiento = convertirAFechaCalendar(personaST[10].trim());
 
                         personas.add(new Pacientes(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, enfermedad, meds, inicioTratamiento));
 
@@ -107,22 +107,6 @@ public class PersonasTXT {
         }
         return tipoSangre;
     }
-
-/*    public static Medicamentos agregarMedicamentos(ArrayList<Medicamentos> medicamentos, int idMed) {
-
-        // PacientesMedicamentos.txt!!
-        Medicamentos medicamento = null;
-
-        Iterator<Medicamentos> hosp = medicamentos.iterator();
-        while (hosp.hasNext()) {
-            medicamento = hosp.next();
-
-            if (medicamento.getIdMed() == idMed) {
-                break;
-            }
-        }
-        return medicamento;
-    }*/
 
     public static void grabarPersonasTXT(TreeSet<Personas> personas) {
 

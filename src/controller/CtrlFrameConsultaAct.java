@@ -36,11 +36,10 @@ public class CtrlFrameConsultaAct implements ActionListener, ItemListener {
 
     private Personas buscarPersona(FrameConsultaAct vista) {
         Personas persona;
-
         try {
             int dni = Integer.parseInt(vista.getTextDNI().getText());
 
-            Iterator<Personas> iteratorPersonas = Controlador.personas.iterator();
+            Iterator<Personas> iteratorPersonas = Controlador.personas2.iterator();
             while (iteratorPersonas.hasNext()) {
                 persona = iteratorPersonas.next();
                 if (persona.getDni() == dni) {

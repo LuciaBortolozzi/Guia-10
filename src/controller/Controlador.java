@@ -14,7 +14,9 @@ public class Controlador {
     static ArrayList<TiposSangre> tiposSangres = TiposSangreTXT.bajarTiposSangreTXT();
     static ArrayList<Medicamentos> medicamentos = MedicamentosTXT.bajarMedicamentosTXT();
 
-    static TreeSet<Personas> personas = PersonasTXT.bajarPersonasTXT(localidades, tiposSangres, medicamentos);
+    static TreeSet<Personas> personas = PersonasTXT.bajarPersonasTXT(localidades, tiposSangres);
+
+    static TreeSet<Personas> personas2 = MedicamentosTXT.bajarPacientesMedicamentosTXT(personas, medicamentos);
 
     public static void ingresarPersona(FrameIngreso vista) {
     }

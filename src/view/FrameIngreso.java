@@ -82,7 +82,7 @@ public class FrameIngreso {
     private JButton buttonAceptar = new JButton("Aceptar");
     private JButton buttonCancelar = new JButton("Cancelar");
     private JButton buttonCopiar = new JButton(">>>>");
-        private JButton buttonEditar = new JButton("Editar");
+    private JButton buttonEditar = new JButton("Editar");
     private JButton buttonAnular = new JButton("Anular");
 
     private JScrollPane scrollPane = new JScrollPane();
@@ -126,9 +126,6 @@ public class FrameIngreso {
             });
         }
 
-
-
-
         buttonAceptar.addActionListener(ctrlFrameIngreso);
 
         buttonExtraccion.addActionListener(ctrlFrameIngreso);
@@ -136,6 +133,7 @@ public class FrameIngreso {
         buttonEditar.addActionListener(ctrlFrameIngreso);
 
         ctrlFrameIngreso.setVista(this);
+
         comboProvincias.addItemListener(ctrlFrameIngreso);
         comboProvincias.addActionListener(ctrlFrameIngreso);
         comboLocalidades.addActionListener(ctrlFrameIngreso);
@@ -272,6 +270,8 @@ public class FrameIngreso {
                         textEnfermedad.setVisible(false);
                         labelMedicamentos.setVisible(false);
                         listMedicamentos.setVisible(false);
+                        scrollPane.setVisible(false);
+                        scrollPaneAux.setVisible(false);
                         buttonCopiar.setVisible(false);
                         listMedicamentosAux.setVisible(false);
                     }
@@ -282,6 +282,8 @@ public class FrameIngreso {
                     textEnfermedad.setVisible(true);
                     labelMedicamentos.setVisible(true);
                     listMedicamentos.setVisible(true);
+                    scrollPane.setVisible(true);
+                    scrollPaneAux.setVisible(true);
                     buttonCopiar.setVisible(true);
                     listMedicamentosAux.setVisible(true);
 
@@ -320,14 +322,16 @@ public class FrameIngreso {
             textInicioTratamiento.setText("");
             radioButtonFem.setSelected(true);
             radioButtonMasc.setSelected(false);
-            radioButtonPaciente.setSelected(false);
-            radioButtonDonador.setSelected(true);
+            radioButtonPaciente.setSelected(true);
+            radioButtonDonador.setSelected(false);
             boxSangre.setSelected(false);
             boxPlaquetas.setSelected(false);
             boxPlasma.setSelected(false);
+            comboLocalidades.setSelectedIndex(0);
+            comboProvincias.setSelectedIndex(0);
+            comboTiposSangre.setSelectedIndex(0);
         }
     }
-
 
     public void editable(boolean esEditable) {
         textNombre.setEditable(esEditable);
