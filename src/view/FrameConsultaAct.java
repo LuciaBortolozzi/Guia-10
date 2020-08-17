@@ -1,6 +1,6 @@
 package view;
 
-import controller.FrameConsultaActCtrl;
+import controller.CtrlFrameConsultaAct;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,17 +11,20 @@ import java.awt.event.ActionListener;
 public class FrameConsultaAct {
 
     private JFrame ventana = new JFrame("Consulta personas");
-    private JPanel panelCentral = new JPanel();
+    private CtrlFrameConsultaAct ctrlFrameConsultaAct;
+    private JPanel panelConsulta = new JPanel();
 
-    private JTextArea textArea = new JTextArea("-Ingrese el documento de la persona o paciente del cual desea realizar la consulta-");
+    private JTextArea textArea = new JTextArea("- Ingrese el documento de la persona del cual desea realizar la consulta -");
     private JLabel labelDNI = new JLabel("Documento");
     private JTextField textDNI = new JTextField(20);
-    private JButton buttonConsutar = new JButton("Consultar");
+    private JButton buttonBuscar = new JButton("Buscar");
     private JButton buttonCancelar = new JButton("Cancelar");
 
-    public FrameConsultaAct(FrameConsultaActCtrl frameConsultaActCtrl) {
+    public FrameConsultaAct(CtrlFrameConsultaAct ctrlFrameConsultaAct) {
 
         ventana.setSize(650, 650);
+        this.ctrlFrameConsultaAct = ctrlFrameConsultaAct;
+        ctrlFrameConsultaAct.setVista(this);
 
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -29,15 +32,17 @@ public class FrameConsultaAct {
             }
         });
 
-        //ARREGLAR ESTO PARA QUE QUEDE MAS LINDO
-        panelCentral.setLayout(new FlowLayout());
-        panelCentral.add(textArea);
-        panelCentral.add(labelDNI);
-        panelCentral.add(textDNI);
-        panelCentral.add(buttonConsutar);
-        panelCentral.add(buttonCancelar);
+        buttonBuscar.addActionListener(ctrlFrameConsultaAct);
 
-        ventana.add(panelCentral);
+        //ARREGLAR ESTO PARA QUE QUEDE MAS LINDO
+        panelConsulta.setLayout(new FlowLayout());
+        panelConsulta.add(textArea);
+        panelConsulta.add(labelDNI);
+        panelConsulta.add(textDNI);
+        panelConsulta.add(buttonBuscar);
+        panelConsulta.add(buttonCancelar);
+
+        ventana.add(panelConsulta);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
 
@@ -49,6 +54,62 @@ public class FrameConsultaAct {
 
             textDNI.setText("");
         }
+    }
+
+    public JFrame getVentana() {
+        return ventana;
+    }
+
+    public void setVentana(JFrame ventana) {
+        this.ventana = ventana;
+    }
+
+    public JPanel getPanelCentral() {
+        return panelConsulta;
+    }
+
+    public void setPanelCentral(JPanel panelConsulta) {
+        this.panelConsulta = panelConsulta;
+    }
+
+    public JTextArea getTextArea() {
+        return textArea;
+    }
+
+    public void setTextArea(JTextArea textArea) {
+        this.textArea = textArea;
+    }
+
+    public JLabel getLabelDNI() {
+        return labelDNI;
+    }
+
+    public void setLabelDNI(JLabel labelDNI) {
+        this.labelDNI = labelDNI;
+    }
+
+    public JTextField getTextDNI() {
+        return textDNI;
+    }
+
+    public void setTextDNI(JTextField textDNI) {
+        this.textDNI = textDNI;
+    }
+
+    public JButton getButtonBuscar() {
+        return buttonBuscar;
+    }
+
+    public void setButtonBuscar(JButton buttonBuscar) {
+        this.buttonBuscar = buttonBuscar;
+    }
+
+    public JButton getButtonCancelar() {
+        return buttonCancelar;
+    }
+
+    public void setButtonCancelar(JButton buttonCancelar) {
+        this.buttonCancelar = buttonCancelar;
     }
 
 }

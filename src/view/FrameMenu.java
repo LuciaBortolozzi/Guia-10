@@ -1,6 +1,6 @@
 package view;
 
-import controller.FrameMenuCtrl;
+import controller.CtrlFrameMenu;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,12 +19,12 @@ public class FrameMenu extends JFrame {
 
     JMenuItem subopcion4 = new JMenuItem("Acerca de");
 
-    private FrameMenuCtrl frameMenuCtrl;
+    private CtrlFrameMenu ctrlFrameMenu;
 
-    public FrameMenu(FrameMenuCtrl frameMenuCtrl) {
+    public FrameMenu(CtrlFrameMenu ctrlFrameMenu) {
 
-        this.frameMenuCtrl = frameMenuCtrl;
-        this.frameMenuCtrl.setFrameMenu(this);
+        this.ctrlFrameMenu = ctrlFrameMenu;
+        this.ctrlFrameMenu.setFrameMenu(this);
 
         this.setTitle("Banco de Sangre");
 
@@ -35,10 +35,10 @@ public class FrameMenu extends JFrame {
         opcion1.add(subopcion3);
         opcion3.add(subopcion4);
 
-        subopcion1.addActionListener(frameMenuCtrl);
-        subopcion2.addActionListener(frameMenuCtrl);
-        subopcion3.addActionListener(frameMenuCtrl);
-        opcion2.addActionListener(frameMenuCtrl);
+        subopcion1.addActionListener(ctrlFrameMenu);
+        subopcion2.addActionListener(ctrlFrameMenu);
+        subopcion3.addActionListener(ctrlFrameMenu);
+        opcion2.addActionListener(ctrlFrameMenu);
 
         solapa.add(opcion1);
         solapa.add(opcion2);

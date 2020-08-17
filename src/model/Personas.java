@@ -2,10 +2,10 @@ package model;
 
 import java.util.Calendar;
 
-public class Personas {
+public class Personas implements Comparable<Personas>{
     protected String nombre;
     protected String apellido;
-    protected long dni;
+    protected int dni;
     protected Localidades localidad;
     protected Calendar fechaNac;
     protected char sexo;
@@ -14,7 +14,7 @@ public class Personas {
     public Personas() {
     }
 
-    public Personas(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre) {
+    public Personas(String nombre, String apellido, int dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -40,11 +40,11 @@ public class Personas {
         this.apellido = apellido;
     }
 
-    public long getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(long dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -78,5 +78,11 @@ public class Personas {
 
     public void setTipoSangre(TiposSangre tipoSangre) {
         this.tipoSangre = tipoSangre;
+    }
+
+    @Override
+    public int compareTo(Personas a) {
+        int lastCmp = apellido.compareTo(a.apellido);                   // Primer parametro
+        return (lastCmp != 0 ? lastCmp : nombre.compareTo(a.nombre));   // Segundo parametro
     }
 }

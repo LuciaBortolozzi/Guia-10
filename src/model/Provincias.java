@@ -1,6 +1,6 @@
 package model;
 
-public class Provincias {
+public class Provincias implements Comparable<Provincias>{
 
     private String nombreProv;
     private int idProvincia;
@@ -24,4 +24,9 @@ public class Provincias {
     public int getIdProvincia() { return idProvincia; }
 
     public void setIdProvincia(int idProvincia) { this.idProvincia = idProvincia; }
+
+    @Override
+    public int compareTo(Provincias a) {
+        return nombreProv.compareTo(a.nombreProv);
+    }
 }

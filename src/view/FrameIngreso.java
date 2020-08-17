@@ -1,6 +1,6 @@
 package view;
 
-import controller.FrameIngresoCtrl;
+import controller.CtrlFrameIngreso;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,19 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-/*La pantalla gráfica para el ingreso de la misma debe incluir:
-
-        Dos listas desplegables, donde la segunda sea dependiente de la primera
-        Listas estática y dinámica con selección múltiple en ambas
-        Botones de dos opciones, dentro de un panel específico
-        Botones de opciones dentro de otro panel específico
-        Casillas de verificación, con una de ellas activa por defecto   //Preguntar
-
-*/
-
 public class FrameIngreso {
 
-    private JFrame ventana = new JFrame("Ingreso personas");
+    private JFrame ventana = new JFrame();
     private JPanel panelPie = new JPanel();
     private JPanel panelCabecera = new JPanel();
     private JPanel panelCenter = new JPanel();
@@ -39,13 +29,9 @@ public class FrameIngreso {
     private JPanel panelDonador = new JPanel();
     private JPanel panelDonador2 = new JPanel();
     private JPanel panelPaciente = new JPanel();
-    private JPanel panelPaciente2 = new JPanel();
-    private JPanel panelPaciente3= new JPanel();
     private JPanel panelUp= new JPanel();
     private JPanel panelDown= new JPanel();
     private JPanel panelMedicina = new JPanel();
-    private JPanel panelMedicina2 = new JPanel();
-    private JPanel panelPepe = new JPanel();
 
     private JTextArea textArea = new JTextArea("Complete con los datos de personas\n" + "sarasa\n" + "sarasa\n");
 
@@ -90,42 +76,78 @@ public class FrameIngreso {
 
     private JList<String> listMedicamentos = new JList<String>();
     private JList<String> listMedicamentosAux = new JList<String>();
+    private DefaultListModel<String> meds = new DefaultListModel<String>();
+    private DefaultListModel<String> medsAux = new DefaultListModel<String>();
 
-    private JButton buttonAgregar = new JButton("Aceptar");
+    private JButton buttonAceptar = new JButton("Aceptar");
     private JButton buttonCancelar = new JButton("Cancelar");
-
     private JButton buttonCopiar = new JButton(">>>>");
-    ;
-    private JScrollPane scrollPane, scrollPaneAux;
+        private JButton buttonEditar = new JButton("Editar");
+    private JButton buttonAnular = new JButton("Anular");
 
-    public FrameIngreso(FrameIngresoCtrl frameIngresoCtrl) {
-        ventana.setSize(650, 650);
-        //ventana.setLayout(new GridLayout(30,1));
+    private JScrollPane scrollPane = new JScrollPane();
+    private JScrollPane scrollPaneAux = new JScrollPane();
 
-        buttonCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                limpiar(true);
-            }
-        });
 
-        buttonAgregar.addActionListener(frameIngresoCtrl);
+    public FrameIngreso(CtrlFrameIngreso ctrlFrameIngreso, boolean esIngreso) {
+        ventana.setSize(800, 800);
 
-        buttonExtraccion.addActionListener(frameIngresoCtrl);
+        if (esIngreso){
 
-        frameIngresoCtrl.setVista(this);
-        comboProvincias.addItemListener(frameIngresoCtrl);
-        comboProvincias.addActionListener(frameIngresoCtrl);
-        comboLocalidades.addActionListener(frameIngresoCtrl);
+            ventana.setTitle("Ingreso de Personas");
+            buttonEditar.setVisible(false);
+            buttonAnular.setVisible(false);
+            buttonAceptar.setEnabled(true);
+            buttonCancelar.setEnabled(true);
+
+            buttonCancelar.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    limpiar(true);
+                }
+            });
+
+        } else {
+            ventana.setTitle("Edicion de Persona");
+            buttonEditar.setEnabled(true);
+            buttonAnular.setEnabled(true);
+            buttonAceptar.setVisible(false);
+            buttonCancelar.setVisible(false);
+
+            buttonCancelar.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cerrar la ventana?",
+                            "Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        ventana.dispose();
+                    }
+                }
+            });
+        }
+
+
+
+
+        buttonAceptar.addActionListener(ctrlFrameIngreso);
+
+        buttonExtraccion.addActionListener(ctrlFrameIngreso);
+
+        buttonEditar.addActionListener(ctrlFrameIngreso);
+
+        ctrlFrameIngreso.setVista(this);
+        comboProvincias.addItemListener(ctrlFrameIngreso);
+        comboProvincias.addActionListener(ctrlFrameIngreso);
+        comboLocalidades.addActionListener(ctrlFrameIngreso);
 
         //comboTiposSangre = new JComboBox((ComboBoxModel) tiposDeSangreST);
-        comboTiposSangre = new JComboBox(frameIngresoCtrl.stringifyTiposSangres().toArray());
+        comboTiposSangre = new JComboBox(ctrlFrameIngreso.stringifyTiposSangres().toArray());
         comboTiposSangre.setMaximumRowCount(8);
 
         textArea.setEditable(false);
         panelCabecera.add(textArea);
         ventana.add(panelCabecera,BorderLayout.NORTH);
 
-        //panelCenter.setLayout(new GridLayout(1,2));
         panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
         panelUp.setLayout(new GridLayout(1,2));
         panelNombre.setLayout(new GridLayout(2,1));
@@ -185,22 +207,30 @@ public class FrameIngreso {
         panelCenterLeft.add(panelDonador2);
 
         panelDown.setLayout(new GridLayout(2,1));
+
         // Paciente
         panelPaciente.add(labelInicioTratamiento);
         panelPaciente.add(textInicioTratamiento);
         panelPaciente.add(labelEnfermedad);
         panelPaciente.add(textEnfermedad);
-        //- - - - > VER ESTA PARTE QUE QUEDA PARA EL CULO
+
+        listMedicamentos.setVisibleRowCount(7);
+        listMedicamentos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        listMedicamentos.setModel(meds);
+        listMedicamentosAux.setVisibleRowCount(7);
+        listMedicamentosAux.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        listMedicamentosAux.setModel(medsAux);
+
         panelMedicina.add(labelMedicamentos);
-        panelMedicina2.setLayout(new FlowLayout());
-        panelMedicina2.add(listMedicamentos);
-        panelMedicina2.add(buttonCopiar);
-        panelMedicina2.add(listMedicamentosAux);
-        panelPepe.add(panelMedicina,BorderLayout.NORTH);
-        panelPepe.add(panelMedicina2,BorderLayout.SOUTH);
+        panelMedicina.setLayout(new FlowLayout());
+        scrollPane.setViewportView(listMedicamentos);
+        panelMedicina.add(scrollPane);
+        buttonCopiar.addActionListener(ctrlFrameIngreso);
+        panelMedicina.add(buttonCopiar);
+        scrollPaneAux.setViewportView(listMedicamentosAux);
+        panelMedicina.add(scrollPaneAux);
         panelDown.add(panelPaciente);
-        panelDown.add(panelPepe);
-        //- - - - > VER ESTA PARTE QUE QUEDA PARA EL CULO
+        panelDown.add(panelMedicina);
 
         panelUp.add(panelCenterLeft);
         panelUp.add(panelCenterRight);
@@ -223,7 +253,6 @@ public class FrameIngreso {
         listMedicamentos.setVisible(true);
         buttonCopiar.setVisible(true);
         listMedicamentosAux.setVisible(true);
-
 
         ItemListener itemListener = new ItemListener() {
 
@@ -264,12 +293,15 @@ public class FrameIngreso {
                 }
             }
         };
+
         radioButtonDonador.addItemListener(itemListener);
         radioButtonPaciente.addItemListener(itemListener);
 
         // Abajo
-        panelPie.add(buttonAgregar);
+        panelPie.add(buttonAceptar);
         panelPie.add(buttonCancelar);
+        panelPie.add(buttonEditar);
+        panelPie.add(buttonAnular);
         ventana.add(panelPie,BorderLayout.SOUTH);
         ventana.add(panelCenter,BorderLayout.CENTER);
 
@@ -297,84 +329,51 @@ public class FrameIngreso {
     }
 
 
-    public JFrame getVentana() {
-        return ventana;
-    }
+    public void editable(boolean esEditable) {
+        textNombre.setEditable(esEditable);
+        textApellido.setEditable(esEditable);
+        textDNI.setEditable(esEditable);
+        textFechaNac.setEditable(esEditable);
+        textEnfermedad.setEditable(esEditable);
+        textInicioTratamiento.setEditable(esEditable);
+        radioButtonFem.setEnabled(esEditable);
+        radioButtonMasc.setEnabled(esEditable);
+        radioButtonPaciente.setEnabled(esEditable);
+        radioButtonDonador.setEnabled(esEditable);
+        boxSangre.setEnabled(esEditable);
+        boxPlaquetas.setEnabled(esEditable);
+        boxPlasma.setEnabled(esEditable);
+        comboLocalidades.setEnabled(esEditable);
+        comboProvincias.setEnabled(esEditable);
+        comboTiposSangre.setEnabled(esEditable);
 
-    public void setVentana(JFrame ventana) {
-        this.ventana = ventana;
-    }
+        listMedicamentos.setEnabled(esEditable);
+        listMedicamentosAux.setEnabled(esEditable);
 
-    public JTextArea getTextArea() {
-        return textArea;
-    }
+        buttonCopiar.setEnabled(esEditable);
 
-    public void setTextArea(JTextArea textArea) {
-        this.textArea = textArea;
-    }
-
-    public JLabel getLabelNombre() {
-        return labelNombre;
-    }
-
-    public void setLabelNombre(JLabel labelNombre) {
-        this.labelNombre = labelNombre;
-    }
-
-    public JLabel getLabelApellido() {
-        return labelApellido;
-    }
-
-    public void setLabelApellido(JLabel labelApellido) {
-        this.labelApellido = labelApellido;
-    }
-
-    public JLabel getLabelDNI() {
-        return labelDNI;
-    }
-
-    public void setLabelDNI(JLabel labelDNI) {
-        this.labelDNI = labelDNI;
-    }
-
-    public JLabel getLabelFechaNac() {
-        return labelFechaNac;
-    }
-
-    public void setLabelFechaNac(JLabel labelFechaNac) {
-        this.labelFechaNac = labelFechaNac;
-    }
-
-    public JLabel getLabelSexo() {
-        return labelSexo;
-    }
-
-    public void setLabelSexo(JLabel labelSexo) {
-        this.labelSexo = labelSexo;
+        buttonAceptar.setEnabled(esEditable);
+        buttonCancelar.setEnabled(esEditable);
     }
 
     public JLabel getLabelLocalidad() {
         return labelLocalidad;
     }
 
-    public void setLabelLocalidad(JLabel labelLocalidad) {
-        this.labelLocalidad = labelLocalidad;
+    public JComboBox<String> getComboLocalidades() {
+        return comboLocalidades;
     }
 
-    public JLabel getLabelProvincia() {
-        return labelProvincia;
+    public JComboBox<String> getComboProvincias() {
+        return comboProvincias;
     }
 
-    public void setLabelProvincia(JLabel labelProvincia) {
-        this.labelProvincia = labelProvincia;
+    public JList<String> getListMedicamentos() {
+        return listMedicamentos;
     }
 
-    public JLabel getLabelTipoSangre() {
-        return labelTipoSangre;
-    }
-
-    public void setLabelTipoSangre(JLabel labelTipoSangre) {
-        this.labelTipoSangre = labelTipoSangre;
+    public JButton getButtonAgregar() {
+        return buttonAceptar;
     }
 
     public JTextField getTextNombre() {
@@ -481,16 +480,8 @@ public class FrameIngreso {
         this.boxPlasma = boxPlasma;
     }
 
-    public JComboBox<String> getComboLocalidades() {
-        return comboLocalidades;
-    }
-
     public void setComboLocalidades(JComboBox<String> comboLocalidades) {
         this.comboLocalidades = comboLocalidades;
-    }
-
-    public JComboBox<String> getComboProvincias() {
-        return comboProvincias;
     }
 
     public void setComboProvincias(JComboBox<String> comboProvincias) {
@@ -505,10 +496,6 @@ public class FrameIngreso {
         this.comboTiposSangre = comboTiposSangre;
     }
 
-    public JList<String> getListMedicamentos() {
-        return listMedicamentos;
-    }
-
     public void setListMedicamentos(JList<String> listMedicamentos) {
         this.listMedicamentos = listMedicamentos;
     }
@@ -521,12 +508,56 @@ public class FrameIngreso {
         this.listMedicamentosAux = listMedicamentosAux;
     }
 
-    public JButton getButtonAgregar() {
-        return buttonAgregar;
+    public JButton getButtonCopiar() {
+        return buttonCopiar;
     }
 
-    public void setButtonAgregar(JButton buttonAgregar) {
-        this.buttonAgregar = buttonAgregar;
+    public JTextField getTextInicioTratamiento() {
+        return textInicioTratamiento;
+    }
+
+    public void setTextInicioTratamiento(JTextField textInicioTratamiento) {
+        this.textInicioTratamiento = textInicioTratamiento;
+    }
+
+    public JTextField getTextEnfermedad() {
+        return textEnfermedad;
+    }
+
+    public void setTextEnfermedad(JTextField textEnfermedad) {
+        this.textEnfermedad = textEnfermedad;
+    }
+
+    public DefaultListModel<String> getMeds() {
+        return meds;
+    }
+
+    public void setMeds(DefaultListModel<String> meds) {
+        this.meds = meds;
+    }
+
+    public DefaultListModel<String> getMedsAux() {
+        return medsAux;
+    }
+
+    public void setMedsAux(DefaultListModel<String> medsAux) {
+        this.medsAux = medsAux;
+    }
+
+    public JButton getButtonExtraccion() {
+        return buttonExtraccion;
+    }
+
+    public void setButtonExtraccion(JButton buttonExtraccion) {
+        this.buttonExtraccion = buttonExtraccion;
+    }
+
+    public JButton getButtonAceptar() {
+        return buttonAceptar;
+    }
+
+    public void setButtonAceptar(JButton buttonAceptar) {
+        this.buttonAceptar = buttonAceptar;
     }
 
     public JButton getButtonCancelar() {
@@ -537,31 +568,23 @@ public class FrameIngreso {
         this.buttonCancelar = buttonCancelar;
     }
 
-    public JButton getButtonCopiar() {
-        return buttonCopiar;
-    }
-
     public void setButtonCopiar(JButton buttonCopiar) {
         this.buttonCopiar = buttonCopiar;
     }
 
-    public JScrollPane getScrollPane() {
-        return scrollPane;
+    public JButton getButtonEditar() {
+        return buttonEditar;
     }
 
-    public void setScrollPane(JScrollPane scrollPane) {
-        this.scrollPane = scrollPane;
+    public void setButtonEditar(JButton buttonEditar) {
+        this.buttonEditar = buttonEditar;
     }
 
-    public JScrollPane getScrollPaneAux() {
-        return scrollPaneAux;
+    public JButton getButtonAnular() {
+        return buttonAnular;
     }
 
-    public void setScrollPaneAux(JScrollPane scrollPaneAux) {
-        this.scrollPaneAux = scrollPaneAux;
+    public void setButtonAnular(JButton buttonAnular) {
+        this.buttonAnular = buttonAnular;
     }
-
-    public JButton getButtonExtraccion() { return buttonExtraccion; }
-
-    public void setButtonExtraccion(JButton buttonExtraccion) { this.buttonExtraccion = buttonExtraccion; }
 }
