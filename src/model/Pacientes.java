@@ -14,7 +14,7 @@ public class Pacientes extends Personas {
         this.inicioTratamiento = inicioTratamiento;
     }
 
-    public Pacientes(String nombre, String apellido, long dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre, String enfermedad, ArrayList<Medicamentos> medicamentos, Calendar inicioTratamiento) {
+    public Pacientes(String nombre, String apellido, int dni, Localidades localidad, Calendar fechaNac, char sexo, TiposSangre tipoSangre, String enfermedad, ArrayList<Medicamentos> medicamentos, Calendar inicioTratamiento) {
         super(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre);
         this.enfermedad = enfermedad;
         this.medicamentos = medicamentos;

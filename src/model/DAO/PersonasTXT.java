@@ -11,8 +11,8 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre, ArrayList<Medicamentos> medicamentos) {
 
@@ -38,7 +38,7 @@ public class PersonasTXT {
                     Calendar fechaSist = convertirAFechaCalendar(personaST[1].trim());
                     String nombre = personaST[2].toUpperCase().trim();
                     String apellido = personaST[3].toUpperCase().trim();
-                    long dni = Long.parseLong(personaST[4].trim());
+                    int dni = Integer.parseInt(personaST[4].trim());
                     Localidades localidad = agregarLocalidad(localidades, personaST[5].toUpperCase().trim());
                     Calendar fechaNac = convertirAFechaCalendar(personaST[6].trim());
                     char sexo = personaST[7].toUpperCase().trim().charAt(0);
@@ -184,5 +184,9 @@ public class PersonasTXT {
         } catch (IOException e3) {
             System.out.println("No se puede grabar el archivo de Personas.txt");
         }
+    }
+
+    public static void eliminarPersona(int dni) {
+        System.out.println("Elimine persona");
     }
 }

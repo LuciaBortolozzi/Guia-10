@@ -1,12 +1,12 @@
 package defaultPackage;
 
-import controller.FrameMenuCtrl;
+import controller.CtrlFrameMenu;
 import view.FrameMenu;
 
 public class Main {
 
     public static void main(String[] args){
-        FrameMenuCtrl frameMenuCtrl = new FrameMenuCtrl();
-        new FrameMenu(frameMenuCtrl);
+        CtrlFrameMenu ctrlFrameMenu = new CtrlFrameMenu();
+        new FrameMenu(ctrlFrameMenu);
     }
 }
