@@ -88,10 +88,12 @@ public class FrameIngreso {
     private JScrollPane scrollPane = new JScrollPane();
     private JScrollPane scrollPaneAux = new JScrollPane();
 
+    private boolean ingreso;
 
     public FrameIngreso(CtrlFrameIngreso ctrlFrameIngreso, boolean esIngreso) {
         ventana.setSize(800, 800);
 
+        ingreso = esIngreso;
         if (esIngreso){
 
             ventana.setTitle("Ingreso de Personas");
@@ -590,5 +592,9 @@ public class FrameIngreso {
 
     public void setButtonAnular(JButton buttonAnular) {
         this.buttonAnular = buttonAnular;
+    }
+
+    public boolean esIngreso() {
+        return ingreso;
     }
 }

@@ -9,6 +9,8 @@ public class Donadores extends Personas {
     private boolean donaPlasma;
     private ArrayList<Extracciones> extracciones = new ArrayList<Extracciones>();
 
+    public Donadores(){}
+
     public Donadores(boolean donaSangre, boolean donaPlaquetas, boolean donaPlasma) {
         this.donaSangre = donaSangre;
         this.donaPlaquetas = donaPlaquetas;

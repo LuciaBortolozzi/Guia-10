@@ -64,7 +64,6 @@ public class MedicamentosTXT {
                 Scanner leerArchivoMedicamentos = new Scanner(archivo);
                 ArrayList<String> medicamentosST = new ArrayList<String>();
 
-                //Guardar contenido en String
                 while (leerArchivoMedicamentos.hasNext()) {
                     String lineaActual = leerArchivoMedicamentos.nextLine();
                     medicamentosST.add(lineaActual);
@@ -80,16 +79,13 @@ public class MedicamentosTXT {
                     int dniPaciente = Integer.parseInt(s.substring(0,8).trim());
                     int idMed = Integer.parseInt(s.substring(8,18).trim());
 
-                    //agregarMedicamentos(medicamentos, idMed);
-                    //medicamentos.add(new Medicamentos(idMed, nombreMed, nombreLab));
-
                     if(primeraVez) {
                         persona = PersonasControlador.buscarPersonas(dniPaciente, personasTXT);
                         documento = dniPaciente;
                         primeraVez = false;
                     }
 
-                    if (persona != null) {
+                    if (persona != null && persona instanceof Pacientes) {
                         if(documento == dniPaciente) {
 
                             medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT,idMed);
@@ -98,14 +94,13 @@ public class MedicamentosTXT {
                                 medicamentos.add(medicamento);
                             }
 
-
                         } else {
-
+                            //ACÁ ESTÁ EL PROBLEMA, NO PUEDO RESOLVERLO, LE PREGUNTARÉ A ANGIE
                             ((Pacientes) persona).setMedicamentos(medicamentos);
                             medicamentos.clear();
                             persona = PersonasControlador.buscarPersonas(dniPaciente, personasTXT);
 
-                            if (persona != null) {
+                            if (persona != null && persona instanceof Pacientes) {
 
                                 documento = dniPaciente;
 
@@ -122,7 +117,8 @@ public class MedicamentosTXT {
                         }
                     }
                 }
-                if (persona != null) {
+
+                if (persona != null && persona instanceof Pacientes) {
                     ((Pacientes) persona).setMedicamentos(medicamentos);
                 }
 
