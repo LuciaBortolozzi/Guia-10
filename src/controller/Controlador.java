@@ -33,13 +33,14 @@ public class Controlador {
     public static TiposSangre buscarTipoSangre(String tipoSangreST) {
         TiposSangre tiposSangre = null;
 
-        for (TiposSangre tipo: tiposSangres) {
+        for (TiposSangre tipo : tiposSangres) {
             String aux = tipo.getGrupo() + " RH " + tipo.getFactor();
             if (aux.equals(tipoSangreST)) {
                 return tipo;
             }
         }
         return tiposSangre;
+    }
 
     public static ArrayList<Medicamentos> buscarMedicamentos(List<String> medicamentosST) {
         ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
