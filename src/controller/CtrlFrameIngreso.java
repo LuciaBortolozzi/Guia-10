@@ -147,7 +147,6 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
         Personas persona = new Personas();
 
         String error = "";
-        String error2 = "";
         int dni;
         int d, m, y;
         String fechaNacST;
