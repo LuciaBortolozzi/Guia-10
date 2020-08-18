@@ -32,6 +32,8 @@ public class PersonasControlador {
 
         }else{
 
+            // Esto tiene que ser con excepcion propia y una vez que analiza el dni
+
             JOptionPane.showMessageDialog(null, "No se puede ingresar la persona, la misma ya se encuentra ingresada");
         }
     }

@@ -144,21 +144,34 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
     public static void agregarPersona(FrameIngreso vista) {
 
-        Personas persona = new Personas();
-
         String error = "";
         int dni;
         int d, m, y;
+        String nombreST;
+        String apellidoST;
+        char sexo;
         String fechaNacST;
-        String inicioTratamientoST;
         Calendar fechaNac = Calendar.getInstance();
+
+        boolean donaSangre;
+        boolean donaPlaquetas;
+        boolean donaPlasma;
+
+        String enfermedadST;
+        String inicioTratamientoST;
         Calendar inicioTratamiento = Calendar.getInstance();
+
         try {
+
+            nombreST = String.valueOf(vista.getTextNombre());
+            apellidoST = String.valueOf(vista.getTextApellido());
 
             dni = Integer.parseInt(vista.getTextDNI().getText());
 
             if ( dni > 10000000){
-                persona.setDni(dni);
+
+                // Validar con excepcion propia si ya existe la persona
+
             } else {
                 error = "Error al ingresar DNI\n";
                 throw new Exception();
@@ -178,7 +191,6 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
                     m = m - 1;
                     fechaNac.set(y, m, d);
-                    persona.setFechaNac(fechaNac);
                 }
 
             } else {
@@ -188,30 +200,41 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
             if (vista.getRadioButtonFem().isSelected()) {
 
-                persona.setSexo('F');
+                sexo = 'F';
 
             } else if (vista.getRadioButtonMasc().isSelected()) {
 
-                persona.setSexo('M');
+                sexo = 'M';
 
             } else {
                 error = "No selecciono sexo \n";
                 throw new Exception();
             }
 
+            String localidadST = vista.getComboLocalidades().getSelectedItem().toString();
+//            String localidadST = Objects.requireNonNull(vista.getComboLocalidades().getSelectedItem()).toString();
+            Localidades localidad = Controlador.buscarLocalidad(localidadST);
+
+            String tipoSangreST = vista.getComboTiposSangre().getSelectedItem().toString();
+//            String tipoSangreST = Objects.requireNonNull(vista.getComboTiposSangre().getSelectedItem()).toString();
+            TiposSangre tipoSangre = Controlador.buscarTipoSangre(tipoSangreST);
+
+
             if (vista.getRadioButtonDonador().isSelected()) {
 
-                ((Donadores) persona).setDonaPlaquetas(vista.getBoxPlaquetas().isSelected());
+                donaPlaquetas = vista.getBoxPlaquetas().isSelected();
 
-                ((Donadores) persona).setDonaPlasma(vista.getBoxPlasma().isSelected());
+                donaPlasma = vista.getBoxPlasma().isSelected();
 
-                ((Donadores) persona).setDonaSangre(vista.getBoxSangre().isSelected());
+                donaSangre = vista.getBoxSangre().isSelected();
 
                 // Extracciones
 
+                Personas persona = new Donadores(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma);
+
             } else if (vista.getRadioButtonPaciente().isSelected()) {
 
-                ((Pacientes) persona).setEnfermedad(String.valueOf(vista.getTextEnfermedad()));
+                enfermedadST = String.valueOf(vista.getTextEnfermedad());
 
                 inicioTratamientoST = vista.getTextInicioTratamiento().getText();
 
@@ -227,30 +250,19 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
                         m = m - 1;
                         inicioTratamiento.set(y, m, d);
-                        ((Pacientes) persona).setInicioTratamiento(inicioTratamiento);
                     }
-
-                    List<String> medicamentosST = vista.getListMedicamentosAux().getSelectedValuesList();
-                    ArrayList<Medicamentos> meds = Controlador.buscarMedicamentos(medicamentosST);
-                    ((Pacientes) persona).setMedicamentos(meds);
-
                 } else {
                     error = "Error al ingresar inicio del tratamiento (el formato debe ser DDMMYYYY) \n";
                     throw new Exception();
                 }
 
+                List<String> medicamentosST = vista.getListMedicamentosAux().getSelectedValuesList();
+                ArrayList<Medicamentos> meds = Controlador.buscarMedicamentos(medicamentosST);
+
+                Personas persona = new Pacientes(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, enfermedadST, meds, inicioTratamiento);
+            } else {
+                Personas persona = new Personas(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre);
             }
-
-            String localidadST = vista.getComboLocalidades().getSelectedItem().toString();
-//            String localidadST = Objects.requireNonNull(vista.getComboLocalidades().getSelectedItem()).toString();
-            Localidades localidad = Controlador.buscarLocalidad(localidadST);
-            persona.setLocalidad(localidad);
-
-            String tipoSangreST = vista.getComboTiposSangre().getSelectedItem().toString();
-//            String tipoSangreST = Objects.requireNonNull(vista.getComboTiposSangre().getSelectedItem()).toString();
-            TiposSangre tipoSangre = Controlador.buscarTipoSangre(tipoSangreST);
-            persona.setTipoSangre(tipoSangre);
-
 
 //            PersonasTXT.grabarPersonasTXT(persona);
 
