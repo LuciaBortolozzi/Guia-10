@@ -39,26 +39,27 @@ public class PersonasTXT {
                     String nombre = personaST[2].toUpperCase().trim();
                     String apellido = personaST[3].toUpperCase().trim();
                     int dni = Integer.parseInt(personaST[4].trim());
-                    Localidades localidad = agregarLocalidad(localidades, personaST[5].toUpperCase().trim());
-                    Calendar fechaNac = convertirAFechaCalendar(personaST[6].trim());
-                    char sexo = personaST[7].toUpperCase().trim().charAt(0);
-                    TiposSangre tipoSangre = agregarTipoSangre(tiposSangre, Integer.parseInt(personaST[8].trim()));
+                    String provincia = personaST[6].trim();
+                    Localidades localidad = agregarLocalidad(localidades, personaST[5].toUpperCase().trim(), Integer.parseInt(provincia));
+                    Calendar fechaNac = convertirAFechaCalendar(personaST[7].trim());
+                    char sexo = personaST[8].toUpperCase().trim().charAt(0);
+                    TiposSangre tipoSangre = agregarTipoSangre(tiposSangre, Integer.parseInt(personaST[9].trim()));
 
                     if (tipo == 1) {
-                        String enfermedad = personaST[9].toUpperCase().trim();
+                        String enfermedad = personaST[10].toUpperCase().trim();
 
                         ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
 
                         //agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
 
-                        Calendar inicioTratamiento = convertirAFechaCalendar(personaST[10].trim());
+                        Calendar inicioTratamiento = convertirAFechaCalendar(personaST[11].trim());
 
                         personas.add(new Pacientes(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, enfermedad, meds, inicioTratamiento));
 
                     } else if (tipo == 2) {
-                        boolean donaSangre = Boolean.parseBoolean(personaST[9].trim());
-                        boolean donaPlaquetas = Boolean.parseBoolean(personaST[10].trim());
-                        boolean donaPlasma = Boolean.parseBoolean(personaST[11].trim());
+                        boolean donaSangre = Boolean.parseBoolean(personaST[10].trim());
+                        boolean donaPlaquetas = Boolean.parseBoolean(personaST[11].trim());
+                        boolean donaPlasma = Boolean.parseBoolean(personaST[12].trim());
 
                         personas.add(new Donadores(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma));
 
@@ -78,7 +79,7 @@ public class PersonasTXT {
         return personas;
     }
 
-    public static Localidades agregarLocalidad(ArrayList<Localidades> localidades, String localidadST) {
+    public static Localidades agregarLocalidad(ArrayList<Localidades> localidades, String localidadST, int provincia) {
 
         Localidades localidad = null;
 
@@ -86,7 +87,7 @@ public class PersonasTXT {
         while (loc.hasNext()) {
             localidad = loc.next();
 
-            if (localidad.getNombreLoc().equals(localidadST)) {
+            if (localidad.getNombreLoc().equals(localidadST) && localidad.getProvincia().getIdProvincia() == provincia) {
                 break;
             }
         }
@@ -173,4 +174,6 @@ public class PersonasTXT {
     public static void eliminarPersona(int dni) {
         System.out.println("Elimine persona");
     }
+
+
 }

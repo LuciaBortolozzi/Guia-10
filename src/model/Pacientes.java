@@ -8,6 +8,8 @@ public class Pacientes extends Personas {
     private ArrayList<Medicamentos> medicamentos;
     private Calendar inicioTratamiento;
 
+    public Pacientes(){}
+
     public Pacientes(String enfermedad, ArrayList<Medicamentos> medicamentos, Calendar inicioTratamiento) {
         this.enfermedad = enfermedad;
         this.medicamentos = medicamentos;

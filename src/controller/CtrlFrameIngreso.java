@@ -79,7 +79,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
         ArrayList<String> tiposSangresST = new ArrayList<String>();
         tiposSangresST.add("Seleccione tipo de sangre");
         for (TiposSangre tipo : tiposSangres) {
-            tiposSangresST.add(tipo.getGrupo() + " RH " + tipo.getFactor());
+            tiposSangresST.add(tipo.getGrupo() + "-RH" + tipo.getFactor());
         }
         return tiposSangresST;
     }
