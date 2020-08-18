@@ -2,9 +2,9 @@ package controller;
 
 import model.*;
 import model.DAO.*;
-import view.FrameIngreso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 public class Controlador {
@@ -18,7 +18,42 @@ public class Controlador {
 
     static TreeSet<Personas> personas2 = MedicamentosTXT.bajarPacientesMedicamentosTXT(personas, medicamentos);
 
-    public static void ingresarPersona(FrameIngreso vista) {
+    public static Localidades buscarLocalidad(String localidadST) {
+        Localidades localidad = null;
+
+        for (Localidades loc: localidades) {
+            if (loc.getNombreLoc().equals(localidadST)){
+                return loc;
+            }
+        }
+
+        return localidad;
     }
 
+    public static TiposSangre buscarTipoSangre(String tipoSangreST) {
+        TiposSangre tiposSangre = null;
+
+        for (TiposSangre tipo: tiposSangres) {
+            String aux = tipo.getGrupo() + " RH " + tipo.getFactor();
+            if (aux.equals(tipoSangreST)) {
+                return tipo;
+            }
+        }
+        return tiposSangre;
+    }
+
+    public static ArrayList<Medicamentos> buscarMedicamentos(List<String> medicamentosST) {
+        ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
+
+        for (Medicamentos med: medicamentos) {
+            for (String medAux: medicamentosST) {
+                if (med.getNombreMed().equals(medAux)){
+                    meds.add(med);
+                }
+            }
+
+        }
+
+        return meds;
+    }
 }

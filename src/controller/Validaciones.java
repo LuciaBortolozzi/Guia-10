@@ -7,7 +7,7 @@ public class Validaciones {
     public static Calendar convertirAFechaCalendar(String f) {
         Calendar fecha = Calendar.getInstance();
 
-        //dd/mm/aaaa
+        //  dd/mm/aaaa
         String[] aux = f.split("/");
         int day = Integer.parseInt(aux[0]);
         int month = Integer.parseInt(aux[1]);
