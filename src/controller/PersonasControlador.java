@@ -58,7 +58,6 @@ public class PersonasControlador {
         if(personaEncontrada(personas, persona)){
 
             Personas personaAux = null;
-
             Iterator<Personas> per = personas.iterator();
             while (per.hasNext()) {
                 personaAux = per.next();
