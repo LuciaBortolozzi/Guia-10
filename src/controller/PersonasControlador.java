@@ -70,7 +70,6 @@ public class PersonasControlador {
             }
 
         }else{
-
             JOptionPane.showMessageDialog(null, "No se puede modificar la persona, la misma no se encuentra ingresada");
         }
     }
