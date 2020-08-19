@@ -79,7 +79,7 @@ public class MedicamentosTXT {
                     int idMed = Integer.parseInt(s.substring(8,18).trim());
 
                     if(primeraVez) {
-                        persona = PersonasControlador.buscarPersonas(dniPaciente, personasTXT);
+                        persona = PersonasControlador.buscarPersona(dniPaciente);
                         documento = dniPaciente;
                         primeraVez = false;
                     }
@@ -97,7 +97,7 @@ public class MedicamentosTXT {
                             //ACÁ ESTÁ EL PROBLEMA, NO PUEDO RESOLVERLO, LE PREGUNTARÉ A ANGIE
                             ((Pacientes) persona).setMedicamentos(medicamentos);
                             medicamentos.clear();
-                            persona = PersonasControlador.buscarPersonas(dniPaciente, personasTXT);
+                            persona = PersonasControlador.buscarPersona(dniPaciente);
 
                             if (persona != null && persona instanceof Pacientes) {
 

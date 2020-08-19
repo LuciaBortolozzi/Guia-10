@@ -7,12 +7,15 @@ import javax.swing.*;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import static controller.Controlador.personas;
+import static controller.Controlador.personasAux;
+
 public class PersonasControlador {
 
-    public static Personas buscarPersonas(int dniPersona, TreeSet<Personas> personas) {
+    public static Personas buscarPersona(int dniPersona) {
 
         Personas persona;
-        Iterator<Personas> iteratorPersonas = personas.iterator();
+        Iterator<Personas> iteratorPersonas = personasAux.iterator();
         while (iteratorPersonas.hasNext()) {
             persona = iteratorPersonas.next();
 
@@ -23,7 +26,7 @@ public class PersonasControlador {
         return null;
     }
 
-    public static void agregarPersona(TreeSet<Personas> personas, Personas persona){
+    /*public static void agregarPersona(TreeSet<Personas> personas, Personas persona){
 
         if(!personaEncontrada(personas, persona)){
 
@@ -36,9 +39,9 @@ public class PersonasControlador {
 
             JOptionPane.showMessageDialog(null, "No se puede ingresar la persona, la misma ya se encuentra ingresada");
         }
-    }
+    }*/
 
-    public static boolean personaEncontrada(TreeSet<Personas> personas, Personas persona){
+    public static boolean personaEncontrada(Personas persona){
 
         boolean personaEncontrada = false;
         Personas personaAux = null;
@@ -55,9 +58,9 @@ public class PersonasControlador {
         return personaEncontrada;
     }
 
-    public static void modificarPersona(TreeSet<Personas> personas, Personas persona){
+    public static void modificarPersona(Personas persona){
         //PROBAR SI ESTO FUNCIONA BIEN
-        if(personaEncontrada(personas, persona)){
+        if(personaEncontrada(persona)){
 
             Personas personaAux = null;
             Iterator<Personas> per = personas.iterator();
@@ -66,7 +69,14 @@ public class PersonasControlador {
 
                 if (personaAux.getDni() == persona.getDni()) {
 
-                    personaAux = persona;
+                    personaAux.setNombre(persona.getNombre());
+                    personaAux.setApellido(persona.getApellido());
+                    personaAux.setTipoSangre(persona.getTipoSangre());
+                    personaAux.setLocalidad(persona.getLocalidad());
+                    personaAux.setSexo(persona.getSexo());
+
+                    // Verificar si cambia de paciente a donador o viceversa
+
                     break;
                 }
             }

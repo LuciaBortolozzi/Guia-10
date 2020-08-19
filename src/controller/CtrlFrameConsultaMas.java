@@ -5,10 +5,7 @@ import view.FrameConsultaMas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.TreeSet;
-
-import static controller.Controlador.personas;
 
 public class CtrlFrameConsultaMas implements ActionListener {
 
@@ -55,10 +52,10 @@ public class CtrlFrameConsultaMas implements ActionListener {
         }
 
         if (provincia.equals("") && tipoDeSangre.equals("")) {
-            return personas;
+            return Controlador.personasAux;
         }
 
-        for (Personas p : personas) {
+        for (Personas p : Controlador.personasAux) {
 
             String tipo = p.getTipoSangre().getGrupo()+"RH"+p.getTipoSangre().getFactor();
             String prov = p.getLocalidad().getProvincia().getNombreProv();

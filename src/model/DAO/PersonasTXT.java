@@ -3,6 +3,7 @@ package model.DAO;
 import model.*;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -11,15 +12,15 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-       private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre) {
 
         TreeSet<Personas> personas = new TreeSet<Personas>();
         try {
-            File archivo = new File( directorio + "Personas.txt");
-            if (archivo.exists()){
+            File archivo = new File(directorio + "Personas.txt");
+            if (archivo.exists()) {
                 Scanner leerArchivoPersonas = new Scanner(archivo);
                 ArrayList<String> personasST = new ArrayList<String>();
 
@@ -63,9 +64,9 @@ public class PersonasTXT {
 
                         personas.add(new Donadores(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma));
 
-                    } else {
+                    }/* else {
                         personas.add(new Personas(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre));
-                    }
+                    }*/
 
                 }
 
@@ -109,62 +110,57 @@ public class PersonasTXT {
         return tipoSangre;
     }
 
-    public static void grabarPersonasTXT(TreeSet<Personas> personas) {
+    public static void grabarPersonasTXT(Personas persona) {
 
         try {
-            File fichero = new File(directorio + "Personas.txt");
+            FileWriter fichero = new FileWriter(directorio + "Personas.txt", true);
             Calendar fecha = Calendar.getInstance();
 
-            if (fichero.exists()) {
-                PrintWriter archivoSalida = new PrintWriter(fichero);
+            PrintWriter archivoSalida = new PrintWriter(fichero);
 
-                Personas persona;
-                Iterator<Personas> per = personas.iterator();
-                while (per.hasNext()) {
-                    persona = per.next();
-
-                    if (persona instanceof Pacientes) {
-
-                        archivoSalida.println( "1" + ";" +
-                                fecha.get(Calendar.DAY_OF_MONTH) + "/" +
-                                fecha.get(Calendar.MONTH) + "/" +
-                                fecha.get(Calendar.YEAR) + ";" +
-                                persona.getNombre() + ";" +
-                                persona.getApellido() + ";" +
-                                persona.getDni() + ";" +
-                                persona.getLocalidad().getNombreLoc() + ";" +
-                                persona.getFechaNac() + ";" +
-                                persona.getSexo() + ";" +
-                                persona.getTipoSangre().getId() + ";" +
-                                ((Pacientes)persona).getEnfermedad() + ";" +
-                                //Medicamentos.txt
-                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH) + "/" +
-                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.MONTH) + "/" +
-                                ((Pacientes)persona).getInicioTratamiento().get(Calendar.YEAR)
-                        );
-
-                    }else if (persona instanceof Donadores) {
-
-                        archivoSalida.println( "2" + ";" +
-                                fecha.get(Calendar.DAY_OF_MONTH) + "/" +
-                                fecha.get(Calendar.MONTH) + "/" +
-                                fecha.get(Calendar.YEAR) + ";" +
-                                persona.getNombre() + ";" +
-                                persona.getApellido() + ";" +
-                                persona.getDni() + ";" +
-                                persona.getLocalidad().getNombreLoc() + ";" +
-                                persona.getFechaNac() + ";" +
-                                persona.getSexo() + ";" +
-                                persona.getTipoSangre() + ";" +
-                                ((Donadores)persona).isDonaSangre() + ";" +
-                                ((Donadores)persona).isDonaPlaquetas() + ";" +
-                                ((Donadores)persona).isDonaPlasma()
-                        );
-                    }
-                }
-
-                archivoSalida.close();
+            if (persona instanceof Pacientes) {
+                archivoSalida.println("1" + ";" +
+                        String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(fecha.get(Calendar.MONTH) + 1)) + "/" +
+                        fecha.get(Calendar.YEAR) + ";" +
+                        persona.getNombre() + ";" +
+                        persona.getApellido() + ";" +
+                        persona.getDni() + ";" +
+                        persona.getLocalidad().getNombreLoc() + ";" +
+                        String.format("%02d",persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                        String.format("%02d",persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                        persona.getFechaNac().get(Calendar.YEAR) + ";" +
+                        persona.getSexo() + ";" +
+                        persona.getTipoSangre().getId() + ";" +
+                        ((Pacientes) persona).getEnfermedad() + ";" +
+                        //Medicamentos.txt
+                        String.format("%02d",((Pacientes) persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(((Pacientes) persona).getInicioTratamiento().get(Calendar.MONTH) + 1)) + "/" +
+                        ((Pacientes) persona).getInicioTratamiento().get(Calendar.YEAR)
+                );
+            } else if (persona instanceof Donadores) {
+                archivoSalida.println("2" + ";" +
+                        String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(fecha.get(Calendar.MONTH) + 1)) + "/" +
+                        fecha.get(Calendar.YEAR) + ";" +
+                        persona.getNombre() + ";" +
+                        persona.getApellido() + ";" +
+                        persona.getDni() + ";" +
+                        persona.getLocalidad().getNombreLoc() + ";" +
+                        String.format("%02d",persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                        String.format("%02d",persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                        persona.getFechaNac().get(Calendar.YEAR) + ";" +
+                        persona.getSexo() + ";" +
+                        persona.getTipoSangre().getId() + ";" +
+                        ((Donadores) persona).isDonaSangre() + ";" +
+                        ((Donadores) persona).isDonaPlaquetas() + ";" +
+                        ((Donadores) persona).isDonaPlasma()
+                );
             }
+
+            archivoSalida.close();
 
         } catch (IOException e3) {
             System.out.println("No se puede grabar el archivo de Personas.txt");

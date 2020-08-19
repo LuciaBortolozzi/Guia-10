@@ -1,6 +1,6 @@
 package model;
 
-public class Localidades {
+public class Localidades implements Comparable<Localidades>{
     private String nombreLoc;
     private String codigoPostal;
     private Provincias provincia;
@@ -33,4 +33,9 @@ public class Localidades {
     public Provincias getProvincia() { return provincia; }
 
     public void setProvincia(Provincias provincia) { this.provincia = provincia; }
+
+    @Override
+    public int compareTo(Localidades o) {
+        return nombreLoc.compareTo(o.nombreLoc);
+    }
 }

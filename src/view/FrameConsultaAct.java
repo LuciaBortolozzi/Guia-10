@@ -36,6 +36,7 @@ public class FrameConsultaAct {
 
         //ARREGLAR ESTO PARA QUE QUEDE MAS LINDO
         panelConsulta.setLayout(new FlowLayout());
+        textArea.setEditable(false);
         panelConsulta.add(textArea);
         panelConsulta.add(labelDNI);
         panelConsulta.add(textDNI);
