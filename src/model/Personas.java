@@ -2,7 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-public class Personas implements Comparable<Personas>{
+public abstract class Personas implements Comparable<Personas>{
     protected String nombre;
     protected String apellido;
     protected int dni;
@@ -82,7 +82,7 @@ public class Personas implements Comparable<Personas>{
 
     @Override
     public int compareTo(Personas a) {
-        int lastCmp = apellido.compareTo(a.apellido);                   // Primer parametro
-        return (lastCmp != 0 ? lastCmp : nombre.compareTo(a.nombre));   // Segundo parametro
+        int lastCmp = this.dni - a.dni;                                     // Primer parametro
+        return (lastCmp != 0 ? lastCmp : apellido.compareTo(a.apellido));   // Segundo parametro
     }
 }

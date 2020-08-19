@@ -12,7 +12,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import static controller.Controlador.*;
 
@@ -163,12 +162,12 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
         try {
 
-            nombreST = String.valueOf(vista.getTextNombre());
-            apellidoST = String.valueOf(vista.getTextApellido());
+            nombreST = vista.getTextNombre().getText().toUpperCase().trim();
+            apellidoST = vista.getTextApellido().getText().toUpperCase().trim();
 
-            dni = Integer.parseInt(vista.getTextDNI().getText());
+            dni = Integer.parseInt(vista.getTextDNI().getText().trim());
 
-            if ( dni > 10000000){
+            if ( dni > 5000000){
 
                 // Validar con excepcion propia si ya existe la persona
 
@@ -177,7 +176,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
                 throw new Exception();
             }
 
-            fechaNacST = vista.getTextFechaNac().getText();
+            fechaNacST = vista.getTextFechaNac().getText().trim();
 
             if (fechaNacST.matches("\\d{8}")){
 
@@ -232,11 +231,25 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
                 Personas persona = new Donadores(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma);
 
+                if (vista.esIngreso()) {
+
+//                    Personas persona = new Donadores(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma);
+                    personas.add(persona);
+                    PersonasTXT.grabarPersonasTXT(persona);
+
+                } else {
+
+                    PersonasControlador.modificarPersona(persona);
+
+                }
+
+
+
             } else if (vista.getRadioButtonPaciente().isSelected()) {
 
-                enfermedadST = String.valueOf(vista.getTextEnfermedad());
+                enfermedadST = vista.getTextEnfermedad().getText().toUpperCase().trim();
 
-                inicioTratamientoST = vista.getTextInicioTratamiento().getText();
+                inicioTratamientoST = vista.getTextInicioTratamiento().getText().trim();
 
                 if (inicioTratamientoST.matches("\\d{8}")){
 
@@ -256,15 +269,36 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
                     throw new Exception();
                 }
 
-                List<String> medicamentosST = vista.getListMedicamentosAux().getSelectedValuesList();
-                ArrayList<Medicamentos> meds = Controlador.buscarMedicamentos(medicamentosST);
+                List<String> medicamentosST = new ArrayList<String>();
+                ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
+
+                for (int i = 0; i < vista.getMedsAux().size(); i++){
+                    medicamentosST.add(vista.getMedsAux().get(i));
+                    meds = Controlador.buscarMedicamentos(medicamentosST);
+                }
 
                 Personas persona = new Pacientes(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, enfermedadST, meds, inicioTratamiento);
-            } else {
-                Personas persona = new Personas(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre);
-            }
 
-//            PersonasTXT.grabarPersonasTXT(persona);
+                if (vista.esIngreso()) {
+
+//                    Personas persona = new Pacientes(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, enfermedadST, meds, inicioTratamiento);
+                    personas.add(persona);
+                    PersonasTXT.grabarPersonasTXT(persona);
+
+                } else {
+
+                    PersonasControlador.modificarPersona(persona);
+
+                }
+
+            } /*else {
+
+                Personas persona = new Personas(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre);
+                personas2.add(persona);
+            }*/
+
+
+
 
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Error en los datos ingresados\n" + error);
@@ -280,7 +314,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
                 + String.format("%02d", (persona.getFechaNac().get(Calendar.MONTH) + 1))
                 +  String.format("%04d", (persona.getFechaNac().get(Calendar.YEAR)));
         vista.getTextFechaNac().setText(fechaNac);
-        vista.getComboTiposSangre().setSelectedItem(persona.getTipoSangre().getGrupo() + " RH " + persona.getTipoSangre().getFactor());
+        vista.getComboTiposSangre().setSelectedItem(persona.getTipoSangre().getGrupo() + "-RH" + persona.getTipoSangre().getFactor());
         vista.getComboProvincias().setSelectedItem(persona.getLocalidad().getProvincia().getNombreProv());
         vista.getComboLocalidades().setSelectedItem(persona.getLocalidad().getNombreLoc());
 
@@ -316,8 +350,6 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             vista.getBoxPlaquetas().setSelected(plaquetas);
             vista.getBoxPlasma().setSelected(plasma);
             vista.getBoxSangre().setSelected(sangre);
-
-            // Extracciones
 
         }
 
