@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TreeSet;
 
+import static controller.Controlador.personas;
+
 public class CtrlFrameConsultaMas implements ActionListener {
 
     private FrameConsultaMas vista;
@@ -52,12 +54,12 @@ public class CtrlFrameConsultaMas implements ActionListener {
         }
 
         if (provincia.equals("") && tipoDeSangre.equals("")) {
-            return Controlador.personasAux;
+            return personas;
         }
 
-        for (Personas p : Controlador.personasAux) {
+        for (Personas p : personas) {
 
-            String tipo = p.getTipoSangre().getGrupo()+"RH"+p.getTipoSangre().getFactor();
+            String tipo = p.getTipoSangre().getGrupo() + "RH" + p.getTipoSangre().getFactor();
             String prov = p.getLocalidad().getProvincia().getNombreProv();
 
             if (!provincia.equals("") && !tipoDeSangre.equals("")) {
