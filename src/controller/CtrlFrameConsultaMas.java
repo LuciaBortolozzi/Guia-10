@@ -5,6 +5,7 @@ import view.FrameConsultaMas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.TreeSet;
 
 import static controller.Controlador.personas;
@@ -29,12 +30,15 @@ public class CtrlFrameConsultaMas implements ActionListener {
             TreeSet<Personas> personasAux = consultaPersonas(provinciaST, tipoDeSangreST);
             for (Personas pers : personasAux) {
                 Object[] row = {pers.getDni(), pers.getNombre(),
-                        pers.getApellido(), pers.getLocalidad().getNombreLoc(), pers.getFechaNac(), pers.getSexo()};
+                        pers.getApellido(), pers.getLocalidad().getNombreLoc(),
+                        String.format("%02d",pers.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d",(pers.getFechaNac().get(Calendar.MONTH)+1)) + "/" +
+                        pers.getFechaNac().get(Calendar.YEAR), pers.getSexo()};
                 vista.getTableModel().addRow(row);
             }
 
-//            vista.getTxtVisualizados().setText(String.valueOf(personasAux.size()));
-//            vista.getTxtTotales().setText(String.valueOf(personas.size()));
+            vista.getTextResultados().setText(String.valueOf(personasAux.size()));
+            vista.getTextTotales().setText(String.valueOf(Controlador.personas.size()));
 
         }
     }

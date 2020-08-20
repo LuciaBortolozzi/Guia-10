@@ -51,10 +51,11 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             if (opcion == JOptionPane.YES_OPTION) {
 
                 eliminarPersona(dni);
-//                grabarTreeSetPersonasTXT(personas);
+                PersonasTXT.grabarTreeSetPersonasTXT(personas);
+
                 JOptionPane.showMessageDialog(null, "La persona se elimino correctamente");
         }
-    }
+      }
     }
 
     public void setVista(FrameIngreso vista) {
