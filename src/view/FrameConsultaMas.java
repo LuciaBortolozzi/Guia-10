@@ -9,8 +9,11 @@ import java.awt.*;
 import java.util.Calendar;
 
 public class FrameConsultaMas {
-    private JFrame ventana = new JFrame("Consulta masiva");
+
     private CtrlFrameConsultaMas ctrlFrameConsultaMas;
+
+    private JFrame ventana = new JFrame("Consulta masiva");
+    private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
     private JPanel panelConsulta = new JPanel(new FlowLayout());
     private JPanel panelTotales = new JPanel(new FlowLayout());
     private JPanel panelCentral = new JPanel();
@@ -33,6 +36,7 @@ public class FrameConsultaMas {
         this.ctrlFrameConsultaMas = ctrlFrameConsultaMas;
         ctrlFrameConsultaMas.setVista(this);
 
+        ventana.setIconImage(icon.getImage());
         ventana.setSize(650, 600);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);

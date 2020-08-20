@@ -14,6 +14,7 @@ import static controller.Controlador.*;
 public class FrameIngreso {
 
     private JFrame ventana = new JFrame();
+    private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
     private JPanel panelPie = new JPanel();
     private JPanel panelCabecera = new JPanel();
     private JPanel panelCenter = new JPanel();
@@ -70,8 +71,6 @@ public class FrameIngreso {
     private JCheckBox boxPlaquetas = new JCheckBox("Plaquetas");
     private JCheckBox boxPlasma = new JCheckBox("Plasma");
 
-    private JButton buttonExtraccion = new JButton("Nueva Extraccion");
-
     private JComboBox<String> comboLocalidades = new JComboBox<String>();
     private JComboBox<String> comboProvincias = new JComboBox<String>();
     private JComboBox<String> comboTiposSangre = new JComboBox<String>();
@@ -94,6 +93,7 @@ public class FrameIngreso {
 
     public FrameIngreso(CtrlFrameIngreso ctrlFrameIngreso, boolean esIngreso) {
         ventana.setSize(800, 800);
+        ventana.setIconImage(icon.getImage());
 
         ingreso = esIngreso;
         if (esIngreso){
@@ -131,8 +131,6 @@ public class FrameIngreso {
         }
 
         buttonAceptar.addActionListener(ctrlFrameIngreso);
-
-        buttonExtraccion.addActionListener(ctrlFrameIngreso);
 
         buttonEditar.addActionListener(ctrlFrameIngreso);
 
@@ -204,7 +202,6 @@ public class FrameIngreso {
         panelDonador.add(boxSangre);
         panelDonador.add(boxPlaquetas);
         panelDonador.add(boxPlasma);
-        panelDonador2.add(buttonExtraccion);
         panelCenterRight.add(panelDonador);
         panelCenterLeft.add(panelDonador2);
 
@@ -245,7 +242,6 @@ public class FrameIngreso {
         boxSangre.setVisible(false);
         boxPlaquetas.setVisible(false);
         boxPlasma.setVisible(false);
-        buttonExtraccion.setVisible(false);
         radioButtonPaciente.setSelected(true);
         labelInicioTratamiento.setVisible(true);
         textInicioTratamiento.setVisible(true);
@@ -266,7 +262,6 @@ public class FrameIngreso {
                         boxSangre.setVisible(true);
                         boxPlaquetas.setVisible(true);
                         boxPlasma.setVisible(true);
-                        buttonExtraccion.setVisible(true);
 
                         labelInicioTratamiento.setVisible(false);
                         textInicioTratamiento.setVisible(false);
@@ -295,7 +290,6 @@ public class FrameIngreso {
                     boxSangre.setVisible(false);
                     boxPlaquetas.setVisible(false);
                     boxPlasma.setVisible(false);
-                    buttonExtraccion.setVisible(false);
                 }
             }
         };
@@ -550,14 +544,6 @@ public class FrameIngreso {
 
     public void setMedsAux(DefaultListModel<String> medsAux) {
         this.medsAux = medsAux;
-    }
-
-    public JButton getButtonExtraccion() {
-        return buttonExtraccion;
-    }
-
-    public void setButtonExtraccion(JButton buttonExtraccion) {
-        this.buttonExtraccion = buttonExtraccion;
     }
 
     public JButton getButtonAceptar() {

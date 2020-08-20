@@ -118,7 +118,7 @@ public class PersonasControlador {
                 if (vista.esIngreso()) {
 
                     personas.add(persona);
-                    PersonasTXT.grabarPersonasTXT(persona);
+                    PersonasTXT.grabarPersonaTXT(persona);
 
                 } else {
 
@@ -164,7 +164,7 @@ public class PersonasControlador {
                 if (vista.esIngreso()) {
 
                     personas.add(persona);
-                    PersonasTXT.grabarPersonasTXT(persona);
+                    PersonasTXT.grabarPersonaTXT(persona);
 
                 } else {
 

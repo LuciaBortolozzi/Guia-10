@@ -1,5 +1,7 @@
 package model.DAO;
 
+import controller.MedicamentosControlador;
+import controller.PersonasControlador;
 import model.*;
 
 import java.io.File;
@@ -12,8 +14,8 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre) {
 
@@ -51,8 +53,6 @@ public class PersonasTXT {
 
                         ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
 
-                        //agregarMedicamentos(medicamentos, Integer.parseInt(personaST[10].trim()));
-
                         Calendar inicioTratamiento = convertirAFechaCalendar(personaST[11].trim());
 
                         personas.add(new Pacientes(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, enfermedad, meds, inicioTratamiento));
@@ -64,9 +64,7 @@ public class PersonasTXT {
 
                         personas.add(new Donadores(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma));
 
-                    }/* else {
-                        personas.add(new Personas(nombre, apellido, dni, localidad, fechaNac, sexo, tipoSangre));
-                    }*/
+                    }
 
                 }
 
@@ -110,7 +108,50 @@ public class PersonasTXT {
         return tipoSangre;
     }
 
-    public static void grabarPersonasTXT(Personas persona) {
+    public static TreeSet<Personas> bajarDonadoresExtraccionesTXT(TreeSet<Personas> personasTXT) {
+
+        try {
+            File archivo = new File(directorio + "DonadoresExtracciones.txt");
+            if (archivo.exists()) {
+                Scanner leerArchivoExtracciones = new Scanner(archivo);
+                ArrayList<String> extraccionesST = new ArrayList<String>();
+
+                while (leerArchivoExtracciones.hasNext()) {
+                    String lineaActual = leerArchivoExtracciones.nextLine();
+                    extraccionesST.add(lineaActual);
+                }
+
+                for (String s : extraccionesST) {
+
+                    String[] extraccionST = s.split(";");
+
+                    int dniPaciente = Integer.parseInt(extraccionST[0].trim());
+                    int nroExtraccion = Integer.parseInt(extraccionST[1].trim());
+                    Calendar fechaDonacion = convertirAFechaCalendar(extraccionST[2].trim());
+                    double pesoDonador = Double.parseDouble(extraccionST[3].trim());
+                    boolean pudoDonar = Boolean.parseBoolean(extraccionST[4].trim());
+                    String presion = extraccionST[5].trim();
+                    double recuentoGlobulosRojos = Double.parseDouble(extraccionST[6].trim());
+                    double cantExtraida = Double.parseDouble(extraccionST[7].trim());
+
+                    Personas persona = PersonasControlador.buscarPersona(dniPaciente);
+                    if (persona instanceof Donadores) {
+                        ((Donadores) persona).setExtracciones(nroExtraccion, fechaDonacion, pesoDonador, pudoDonar, presion, recuentoGlobulosRojos, cantExtraida);
+                    }
+
+                }
+
+                leerArchivoExtracciones.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return personasTXT;
+    }
+
+    public static void grabarPersonaTXT(Personas persona) {
 
         try {
             FileWriter fichero = new FileWriter(directorio + "Personas.txt", true);
@@ -121,36 +162,36 @@ public class PersonasTXT {
             if (persona instanceof Pacientes) {
                 archivoSalida.println("1" + ";" +
                         String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(fecha.get(Calendar.MONTH) + 1)) + "/" +
+                        String.format("%02d", (fecha.get(Calendar.MONTH) + 1)) + "/" +
                         fecha.get(Calendar.YEAR) + ";" +
                         persona.getNombre() + ";" +
                         persona.getApellido() + ";" +
                         persona.getDni() + ";" +
                         persona.getLocalidad().getNombreLoc() + ";" +
-                        String.format("%02d",persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
-                        String.format("%02d",persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                        String.format("%02d", persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                        String.format("%02d", persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d", (persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
                         persona.getFechaNac().get(Calendar.YEAR) + ";" +
                         persona.getSexo() + ";" +
                         persona.getTipoSangre().getId() + ";" +
                         ((Pacientes) persona).getEnfermedad() + ";" +
                         //Medicamentos.txt
-                        String.format("%02d",((Pacientes) persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(((Pacientes) persona).getInicioTratamiento().get(Calendar.MONTH) + 1)) + "/" +
+                        String.format("%02d", ((Pacientes) persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d", (((Pacientes) persona).getInicioTratamiento().get(Calendar.MONTH) + 1)) + "/" +
                         ((Pacientes) persona).getInicioTratamiento().get(Calendar.YEAR)
                 );
             } else if (persona instanceof Donadores) {
                 archivoSalida.println("2" + ";" +
                         String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(fecha.get(Calendar.MONTH) + 1)) + "/" +
+                        String.format("%02d", (fecha.get(Calendar.MONTH) + 1)) + "/" +
                         fecha.get(Calendar.YEAR) + ";" +
                         persona.getNombre() + ";" +
                         persona.getApellido() + ";" +
                         persona.getDni() + ";" +
                         persona.getLocalidad().getNombreLoc() + ";" +
-                        String.format("%02d",persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
-                        String.format("%02d",persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                        String.format("%02d", persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                        String.format("%02d", persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                        String.format("%02d", (persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
                         persona.getFechaNac().get(Calendar.YEAR) + ";" +
                         persona.getSexo() + ";" +
                         persona.getTipoSangre().getId() + ";" +
@@ -167,7 +208,7 @@ public class PersonasTXT {
         }
     }
 
-    public static void grabarTreeSetPersonasTXT(TreeSet<Personas> personas) {
+    public static void grabarSetPersonasTXT(TreeSet<Personas> personas) {
 
         try {
             File fichero = new File(directorio + "Personas.txt");
@@ -224,7 +265,7 @@ public class PersonasTXT {
                     }
                 }
 
-                    archivoSalida.close();
+                archivoSalida.close();
             }
 
         } catch (IOException e4) {

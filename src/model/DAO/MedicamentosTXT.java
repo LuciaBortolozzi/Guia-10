@@ -14,15 +14,15 @@ import java.util.TreeSet;
 
 public class MedicamentosTXT {
 
-   private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-//    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //   private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Medicamentos> bajarMedicamentosTXT() {
 
         ArrayList<Medicamentos> medicamentos = new ArrayList<Medicamentos>();
         try {
-            File archivo = new File( directorio + "Medicamentos.txt");
-            if (archivo.exists()){
+            File archivo = new File(directorio + "Medicamentos.txt");
+            if (archivo.exists()) {
                 Scanner leerArchivoMedicamentos = new Scanner(archivo);
                 ArrayList<String> medicamentosST = new ArrayList<String>();
 
@@ -35,9 +35,9 @@ public class MedicamentosTXT {
                 // Guardar objetos
                 for (String s : medicamentosST) {
 
-                    int idMed = Integer.parseInt(s.substring(0,10).trim());
-                    String nombreMed = s.substring(10,58).trim();
-                    String nombreLab = s.substring(58,83).trim();
+                    int idMed = Integer.parseInt(s.substring(0, 10).trim());
+                    String nombreMed = s.substring(10, 58).trim();
+                    String nombreLab = s.substring(58, 83).trim();
 
                     medicamentos.add(new Medicamentos(idMed, nombreMed, nombreLab));
                 }
@@ -58,8 +58,8 @@ public class MedicamentosTXT {
         ArrayList<Medicamentos> medicamentos = new ArrayList<Medicamentos>();
 
         try {
-            File archivo = new File( directorio + "PacientesMedicamentos.txt");
-            if (archivo.exists()){
+            File archivo = new File(directorio + "PacientesMedicamentos.txt");
+            if (archivo.exists()) {
                 Scanner leerArchivoMedicamentos = new Scanner(archivo);
                 ArrayList<String> medicamentosST = new ArrayList<String>();
 
@@ -75,26 +75,26 @@ public class MedicamentosTXT {
 
                 for (String s : medicamentosST) {
 
-                    int dniPaciente = Integer.parseInt(s.substring(0,8).trim());
-                    int idMed = Integer.parseInt(s.substring(8,18).trim());
+                    int dniPaciente = Integer.parseInt(s.substring(0, 8).trim());
+                    int idMed = Integer.parseInt(s.substring(8, 18).trim());
 
-                    if(primeraVez) {
+                    if (primeraVez) {
                         persona = PersonasControlador.buscarPersona(dniPaciente);
                         documento = dniPaciente;
                         primeraVez = false;
                     }
 
-                    if (persona != null && persona instanceof Pacientes) {
-                        if(documento == dniPaciente) {
+                    if (persona instanceof Pacientes) {
+                        if (documento == dniPaciente) {
 
-                            medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT,idMed);
+                            medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT, idMed);
 
                             if (medicamento != null) {
                                 medicamentos.add(medicamento);
                             }
 
                         } else {
-                            //ACÁ ESTÁ EL PROBLEMA, NO PUEDO RESOLVERLO, LE PREGUNTARÉ A ANGIE
+
                             ((Pacientes) persona).setMedicamentos(medicamentos);
                             medicamentos.clear();
                             persona = PersonasControlador.buscarPersona(dniPaciente);
@@ -103,9 +103,9 @@ public class MedicamentosTXT {
 
                                 documento = dniPaciente;
 
-                                if(documento == dniPaciente) {
+                                if (documento == dniPaciente) {
 
-                                    medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT,idMed);
+                                    medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT, idMed);
 
                                     if (medicamento != null) {
 
@@ -117,7 +117,7 @@ public class MedicamentosTXT {
                     }
                 }
 
-                if (persona != null && persona instanceof Pacientes) {
+                if (persona instanceof Pacientes) {
                     ((Pacientes) persona).setMedicamentos(medicamentos);
                 }
 
@@ -130,8 +130,5 @@ public class MedicamentosTXT {
 
         return personasTXT;
     }
-
-
-
 
 }
