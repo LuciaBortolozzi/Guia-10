@@ -50,7 +50,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar la persona?",
                     "Confirmación", JOptionPane.YES_NO_OPTION);
             if (opcion == JOptionPane.YES_OPTION) {
-                PersonasTXT.eliminarPersona(dni);
+               // PersonasTXT.eliminarPersona(dni);
                 JOptionPane.showMessageDialog(null, "La persona se elimino correctamente");
         }
     }

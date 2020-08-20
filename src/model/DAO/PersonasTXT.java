@@ -12,8 +12,8 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-    //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //   private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre) {
 
@@ -167,9 +167,69 @@ public class PersonasTXT {
         }
     }
 
-    public static void eliminarPersona(int dni) {
-        System.out.println("Elimine persona");
-    }
+    public static void grabarTreeSetPersonasTXT(TreeSet<Personas> personas) {
 
+        try {
+            File fichero = new File(directorio + "Personas.txt");
+            Calendar fecha = Calendar.getInstance();
+
+            if (fichero.exists()) {
+                PrintWriter archivoSalida = new PrintWriter(fichero);
+
+                Personas persona;
+                Iterator<Personas> per = personas.iterator();
+                while (per.hasNext()) {
+                    persona = per.next();
+
+                    if (persona instanceof Pacientes) {
+                        archivoSalida.println("1" + ";" +
+                                String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (fecha.get(Calendar.MONTH) + 1)) + "/" +
+                                fecha.get(Calendar.YEAR) + ";" +
+                                persona.getNombre() + ";" +
+                                persona.getApellido() + ";" +
+                                persona.getDni() + ";" +
+                                persona.getLocalidad().getNombreLoc() + ";" +
+                                String.format("%02d", persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                                String.format("%02d", persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                                persona.getFechaNac().get(Calendar.YEAR) + ";" +
+                                persona.getSexo() + ";" +
+                                persona.getTipoSangre().getId() + ";" +
+                                ((Pacientes) persona).getEnfermedad() + ";" +
+                                //Medicamentos.txt
+                                String.format("%02d", ((Pacientes) persona).getInicioTratamiento().get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (((Pacientes) persona).getInicioTratamiento().get(Calendar.MONTH) + 1)) + "/" +
+                                ((Pacientes) persona).getInicioTratamiento().get(Calendar.YEAR)
+                        );
+                    } else if (persona instanceof Donadores) {
+                        archivoSalida.println("2" + ";" +
+                                String.format("%02d", fecha.get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (fecha.get(Calendar.MONTH) + 1)) + "/" +
+                                fecha.get(Calendar.YEAR) + ";" +
+                                persona.getNombre() + ";" +
+                                persona.getApellido() + ";" +
+                                persona.getDni() + ";" +
+                                persona.getLocalidad().getNombreLoc() + ";" +
+                                String.format("%02d", persona.getLocalidad().getProvincia().getIdProvincia()) + ";" +
+                                String.format("%02d", persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                                persona.getFechaNac().get(Calendar.YEAR) + ";" +
+                                persona.getSexo() + ";" +
+                                persona.getTipoSangre().getId() + ";" +
+                                ((Donadores) persona).isDonaSangre() + ";" +
+                                ((Donadores) persona).isDonaPlaquetas() + ";" +
+                                ((Donadores) persona).isDonaPlasma()
+                        );
+                    }
+                }
+
+                    archivoSalida.close();
+            }
+
+        } catch (IOException e4) {
+            System.out.println("No se puede grabar el archivo de Personas.txt");
+        }
+    }
 
 }

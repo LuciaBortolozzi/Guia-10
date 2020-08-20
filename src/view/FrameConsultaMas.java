@@ -12,6 +12,8 @@ public class FrameConsultaMas {
     private JFrame ventana = new JFrame("Consulta masiva");
     private CtrlFrameConsultaMas ctrlFrameConsultaMas;
     private JPanel panelConsulta = new JPanel(new FlowLayout());
+    private JPanel panelTotales = new JPanel(new FlowLayout());
+    private JPanel panelCentral = new JPanel();
 
     private JLabel labelProvincia = new JLabel("Provincia");
     private JTextField textProvincia = new JTextField(20);
@@ -22,13 +24,16 @@ public class FrameConsultaMas {
     private DefaultTableModel tableModel = new DefaultTableModel();
     private JTable tabla = new JTable(tableModel);
     private JScrollPane scrollPane = new JScrollPane(tabla);
+    private JLabel labelResultado = new JLabel("coincidencias en");
+    private JTextField textResultados = new JTextField(20);
+    private JLabel labelTotales = new JLabel("personas");
+    private JTextField textTotales = new JTextField(20);
 
     public FrameConsultaMas(CtrlFrameConsultaMas ctrlFrameConsultaMas) {
         this.ctrlFrameConsultaMas = ctrlFrameConsultaMas;
         ctrlFrameConsultaMas.setVista(this);
 
-        ventana.setSize(650, 650);
-        ventana.setLayout(new FlowLayout());
+        ventana.setSize(650, 600);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
 
@@ -41,14 +46,24 @@ public class FrameConsultaMas {
         panelConsulta.add(labelTipoSangre);
         panelConsulta.add(textTipoSangre);
 
-        panelConsulta.add(scrollPane);
+        panelTotales.add(textResultados);
+        panelTotales.add(labelResultado);
+        panelTotales.add(textTotales);
+        panelTotales.add(labelTotales);
+        textResultados.setEditable(false);
+        textTotales.setEditable(false);
+
 
         for (int i = 0; i < columnas.length; i++) {
             tableModel.addColumn(columnas[i]);
         }
-        panelConsulta.add(buttonBuscar);
-        ventana.add(panelConsulta);
 
+        panelCentral.add(scrollPane, BorderLayout.CENTER);
+        panelCentral.add(panelTotales, BorderLayout.SOUTH);
+
+        ventana.add(panelConsulta, BorderLayout.NORTH);
+        ventana.add(buttonBuscar, BorderLayout.SOUTH);
+        ventana.add(panelCentral, BorderLayout.CENTER);
 
     }
 
@@ -107,4 +122,12 @@ public class FrameConsultaMas {
     public void setScrollPane(JScrollPane scrollPane) {
         this.scrollPane = scrollPane;
     }
+
+    public JTextField getTextResultados() { return textResultados; }
+
+    public void setTextResultados(JTextField textResultados) { this.textResultados = textResultados; }
+
+    public JTextField getTextTotales() { return textTotales; }
+
+    public void setTextTotales(JTextField textTotales) { this.textTotales = textTotales; }
 }
