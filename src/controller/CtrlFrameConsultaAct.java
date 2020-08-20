@@ -12,6 +12,7 @@ import java.awt.event.ItemListener;
 import java.util.Iterator;
 
 import static controller.Controlador.personasAux;
+import static controller.PersonasControlador.mostrarPersona;
 
 public class CtrlFrameConsultaAct implements ActionListener, ItemListener {
 
@@ -27,7 +28,7 @@ public class CtrlFrameConsultaAct implements ActionListener, ItemListener {
 
                 CtrlFrameIngreso ctrlFrameIngreso = new CtrlFrameIngreso();
                 FrameIngreso consulta = new FrameIngreso(ctrlFrameIngreso, false);
-                ctrlFrameIngreso.mostrarPersona(persona);
+                mostrarPersona(persona, consulta);
                 consulta.editable(false);
 
             } else {

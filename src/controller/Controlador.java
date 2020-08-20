@@ -21,12 +21,11 @@ public class Controlador {
     public static Localidades buscarLocalidad(String localidadST) {
         Localidades localidad = null;
 
-        for (Localidades loc: localidades) {
-            if (loc.getNombreLoc().equals(localidadST)){
+        for (Localidades loc : localidades) {
+            if (loc.getNombreLoc().equals(localidadST)) {
                 return loc;
             }
         }
-
         return localidad;
     }
 
@@ -45,15 +44,40 @@ public class Controlador {
     public static ArrayList<Medicamentos> buscarMedicamentos(List<String> medicamentosST) {
         ArrayList<Medicamentos> meds = new ArrayList<Medicamentos>();
 
-        for (Medicamentos med: medicamentos) {
-            for (String medAux: medicamentosST) {
-                if (med.getNombreMed().equals(medAux)){
+        for (Medicamentos med : medicamentos) {
+            for (String medAux : medicamentosST) {
+                if (med.getNombreMed().equals(medAux)) {
                     meds.add(med);
                 }
             }
 
         }
-
         return meds;
+    }
+
+    public static List<String> getLocalidadesxProvincia(String provSeleccionada) {
+
+        List<String> STLocalidades = new ArrayList();
+
+        for (Localidades loc : localidades) {
+            if (loc != null) {
+                if (loc.getProvincia().getNombreProv().equals(provSeleccionada)) {
+
+                    STLocalidades.add(loc.getNombreLoc());
+
+                }
+            }
+        }
+        return STLocalidades;
+    }
+
+    public static ArrayList<String> stringifyTiposSangres() {
+
+        ArrayList<String> tiposSangresST = new ArrayList<String>();
+        tiposSangresST.add("Seleccione tipo de sangre");
+        for (TiposSangre tipo : tiposSangres) {
+            tiposSangresST.add(tipo.getGrupo() + "-RH" + tipo.getFactor());
+        }
+        return tiposSangresST;
     }
 }

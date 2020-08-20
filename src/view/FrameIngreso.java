@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import static controller.Controlador.*;
+
 public class FrameIngreso {
 
     private JFrame ventana = new JFrame();
@@ -141,7 +143,7 @@ public class FrameIngreso {
         comboLocalidades.addActionListener(ctrlFrameIngreso);
 
         //comboTiposSangre = new JComboBox((ComboBoxModel) tiposDeSangreST);
-        comboTiposSangre = new JComboBox(ctrlFrameIngreso.stringifyTiposSangres().toArray());
+        comboTiposSangre = new JComboBox(stringifyTiposSangres().toArray());
         comboTiposSangre.setMaximumRowCount(8);
 
         textArea.setEditable(false);
@@ -344,8 +346,8 @@ public class FrameIngreso {
         textInicioTratamiento.setEditable(esEditable);
         radioButtonFem.setEnabled(esEditable);
         radioButtonMasc.setEnabled(esEditable);
-        radioButtonPaciente.setEnabled(esEditable);
-        radioButtonDonador.setEnabled(esEditable);
+        radioButtonPaciente.setEnabled(!esEditable);
+        radioButtonDonador.setEnabled(!esEditable);
         boxSangre.setEnabled(esEditable);
         boxPlaquetas.setEnabled(esEditable);
         boxPlasma.setEnabled(esEditable);
