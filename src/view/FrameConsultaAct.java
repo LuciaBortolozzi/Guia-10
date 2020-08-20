@@ -10,8 +10,10 @@ import java.awt.event.ActionListener;
 
 public class FrameConsultaAct {
 
-    private JFrame ventana = new JFrame("Consulta personas");
     private CtrlFrameConsultaAct ctrlFrameConsultaAct;
+
+    private JFrame ventana = new JFrame("Consulta personas");
+    private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
     private JPanel panelConsulta = new JPanel();
 
     private JTextArea textArea = new JTextArea("- Ingrese el documento de la persona del cual desea realizar la consulta -");
@@ -22,6 +24,7 @@ public class FrameConsultaAct {
 
     public FrameConsultaAct(CtrlFrameConsultaAct ctrlFrameConsultaAct) {
 
+        ventana.setIconImage(icon.getImage());
         ventana.setSize(650, 650);
         this.ctrlFrameConsultaAct = ctrlFrameConsultaAct;
         ctrlFrameConsultaAct.setVista(this);

@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 
 public class FrameMenu extends JFrame {
 
+    private ImageIcon background = new ImageIcon("src/resources/blood-donation-2.png");
+    private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
+    private JLabel labelBackground = new JLabel(background);
+
     JMenu opcion1 = new JMenu("Operaciones");
     JMenuItem opcion2 = new JMenuItem("Estadisticas");
     JMenu opcion3 = new JMenu("Sistema");
@@ -45,21 +49,20 @@ public class FrameMenu extends JFrame {
         solapa.add(opcion3);
         solapa.add(opcion4);
 
-
         subopcion4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,
                         "Banco de Sangre\n" +
-                                "Versión 1.0\n" +
-                                "2020 - Schmidt y Bortolozzi", "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+                                "Versión 1.0 - 2020\n" +
+                                "Schmidt y Bortolozzi", "Acerca de", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
         opcion4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea salir de la aplicación?",
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Desea salir de la aplicación?",
                         "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (opcion == JOptionPane.YES_OPTION) {
                     System.exit(0);
@@ -71,8 +74,11 @@ public class FrameMenu extends JFrame {
         setJMenuBar(barraMenu);
         barraMenu.add(solapa);
 
+        setIconImage(icon.getImage());
+        setResizable(false);
+        add(labelBackground);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 300);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setVisible(true);
 
