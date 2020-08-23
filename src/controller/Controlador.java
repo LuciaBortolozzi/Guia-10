@@ -16,7 +16,9 @@ public class Controlador {
 
     static TreeSet<Personas> personasAux = PersonasTXT.bajarPersonasTXT(localidades, tiposSangres);
 
-    static TreeSet<Personas> personas = MedicamentosTXT.bajarPacientesMedicamentosTXT(personasAux, medicamentos);
+    static TreeSet<Personas> personasExt = PersonasTXT.bajarDonadoresExtraccionesTXT(personasAux);
+
+    static TreeSet<Personas> personas = MedicamentosTXT.bajarPacientesMedicamentosTXT(personasExt, medicamentos);
 
     public static Localidades buscarLocalidad(String localidadST) {
         Localidades localidad = null;

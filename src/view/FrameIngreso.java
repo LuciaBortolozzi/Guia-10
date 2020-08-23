@@ -92,7 +92,7 @@ public class FrameIngreso {
     private boolean ingreso;
 
     public FrameIngreso(CtrlFrameIngreso ctrlFrameIngreso, boolean esIngreso) {
-        ventana.setSize(800, 800);
+        ventana.setSize(700, 800);
         ventana.setIconImage(icon.getImage());
 
         ingreso = esIngreso;

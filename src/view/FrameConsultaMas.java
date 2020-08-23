@@ -26,9 +26,9 @@ public class FrameConsultaMas {
     private JTable tabla = new JTable(tableModel);
     private JScrollPane scrollPane = new JScrollPane(tabla);
     private JLabel labelResultado = new JLabel("coincidencias en");
-    private JTextField textResultados = new JTextField(20);
+    private JTextField textResultados = new JTextField(5);
     private JLabel labelTotales = new JLabel("personas");
-    private JTextField textTotales = new JTextField(20);
+    private JTextField textTotales = new JTextField(5);
 
     public FrameConsultaMas(CtrlFrameConsultaMas ctrlFrameConsultaMas) {
         this.ctrlFrameConsultaMas = ctrlFrameConsultaMas;

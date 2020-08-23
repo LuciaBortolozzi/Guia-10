@@ -11,6 +11,13 @@ public class CtrlFrameEstadisticas {
     }
 
     public void setVista(FrameEstadisticas vista) {
+
         this.vista = vista;
+    }
+
+    public void getEstadisticas(){
+
+
+
     }
 }

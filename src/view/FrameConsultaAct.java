@@ -18,14 +18,14 @@ public class FrameConsultaAct {
 
     private JTextArea textArea = new JTextArea("- Ingrese el documento de la persona del cual desea realizar la consulta -");
     private JLabel labelDNI = new JLabel("Documento");
-    private JTextField textDNI = new JTextField(20);
+    private JTextField textDNI = new JTextField(10);
     private JButton buttonBuscar = new JButton("Buscar");
     private JButton buttonCancelar = new JButton("Cancelar");
 
     public FrameConsultaAct(CtrlFrameConsultaAct ctrlFrameConsultaAct) {
 
         ventana.setIconImage(icon.getImage());
-        ventana.setSize(650, 650);
+        ventana.setSize(450, 100);
         this.ctrlFrameConsultaAct = ctrlFrameConsultaAct;
         ctrlFrameConsultaAct.setVista(this);
 
