@@ -57,7 +57,7 @@ public class Controlador {
 
     public static List<String> getLocalidadesxProvincia(String provSeleccionada) {
 
-        List<String> STLocalidades = new ArrayList();
+        List<String> STLocalidades = new ArrayList<String>();
 
         for (Localidades loc : localidades) {
             if (loc != null) {

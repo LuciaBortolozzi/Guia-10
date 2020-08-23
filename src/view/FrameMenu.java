@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class FrameMenu extends JFrame {
 
-    private ImageIcon background = new ImageIcon("src/resources/blood-donation-2.png");
+    private final ImageIcon background = new ImageIcon("src/resources/blood-donation-2.png");
     private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
     private JLabel labelBackground = new JLabel(background);
 

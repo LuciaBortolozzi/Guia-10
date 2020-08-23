@@ -1,9 +1,6 @@
 package controller;
 
-import view.FrameConsultaAct;
-import view.FrameConsultaMas;
-import view.FrameIngreso;
-import view.FrameMenu;
+import view.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +29,7 @@ public class CtrlFrameMenu implements ActionListener {
 
         } else if (e.getSource() == frameMenu.getOpcion2()) {
 
-            JOptionPane.showMessageDialog(null, "OPCION2", "OPCION2", JOptionPane.INFORMATION_MESSAGE);
+            new FrameEstadisticas(new CtrlFrameEstadisticas());
 
         }
     }
