@@ -1,80 +1,50 @@
 package model.DAO;
 
+import model.Personas;
+
 import javax.json.Json;
 import javax.json.stream.JsonGenerator;
 import java.io.*;
 import java.io.FileOutputStream;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 public class EstadisticasJson {
 
     private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
     //private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
-    public static void grabarJsonStream() {
+    public static void grabarJsonStream(TreeSet<Personas> personasAux) {
 
         try {
 
-            File aJson = new File(directorio + "RecomendacionesSeriesJovenes.json");
+            File aJson = new File(directorio + "EstadisticaPeso.json");
             FileOutputStream fsOutJson = new FileOutputStream(aJson);
             JsonGenerator genJson = Json.createGenerator(fsOutJson);
 
+            Personas persona;
+            Iterator<Personas> iteratorPersonas = personasAux.iterator();
             genJson.writeStartObject(); //objeto inicial
+            genJson.writeStartArray("Donadores");
 
-            {
-                genJson.write("documento", "35645780");
-                genJson.write("edad", "29");
-                genJson.writeStartObject("domicilio");
-                genJson.write("calle", "Villa Maria GC 2570");
-                genJson.write("localidad", "Manuel Alberti");
-                genJson.write("codigoPostal", "1604");
-                genJson.writeEnd();
-
-                /*
-                genJson.writeStartArray("telefonos");
-                for(Telefonos tel : otraPers.getTelefonos())
-                {
-                    if (tel.getTipo()!=null)
-                    {
-                        genJson.writeStartObject();
-                        genJson.write("tipo", tel.getTipo());
-                        genJson.write("numero", tel.getNumero());
-                        genJson.writeEnd();
-                    }
-                }
-
-                genJson.writeEnd();
-
-
-                genJson.writeStartArray("deportes");
-
-                for(String dep : otraPers.getDeportes())
-                {
-                    if (dep!=null) objJsonGen.write(dep);
-
-                }
-
-                genJson.writeEnd();
-
-                genJson.write("estudia", true));
-
-
-                genJson.writeStartArray("salarios");
-                for(double sal : otraPers.getSalarios())
-                {
-                    if (sal!=0) genJson.write(sal);
-
-                }
-                genJson.writeEnd();
-                */
+            while (iteratorPersonas.hasNext()) {
+                persona = iteratorPersonas.next();
+                genJson.writeStartObject(); //objeto inicial
+                    genJson.write("Nombre", persona.getNombre());
+                    genJson.write("Apellido", persona.getApellido());
+                    genJson.write("DNI", persona.getDni());
+                    genJson.write("Fecha Nacimiento", String.format("%02d",persona.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                            String.format("%02d",(persona.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                            persona.getFechaNac().get(Calendar.YEAR));
                 genJson.writeEnd();
             }
-
+            genJson.writeEnd();
+            genJson.writeEnd();
             genJson.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }

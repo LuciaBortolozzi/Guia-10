@@ -41,6 +41,8 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             vista.getButtonAceptar().setEnabled(true);
             vista.getButtonCancelar().setEnabled(true);
             vista.getButtonEditar().setVisible(false);
+            vista.getRadioButtonDonador().setEnabled(false);
+            vista.getRadioButtonPaciente().setEnabled(false);
             vista.getButtonAnular().setVisible(false);
 
         } else if (e.getSource() == vista.getButtonAnular()) {

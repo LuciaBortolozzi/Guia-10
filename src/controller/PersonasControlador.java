@@ -54,6 +54,12 @@ public class PersonasControlador {
             if (dni > 5000000) {
 
                 // Validar con excepcion propia si ya existe la persona
+                Personas persona = buscarPersona(dni);
+
+                if(persona != null){
+
+                  throw new PersonaExistente(dni);
+                }
 
             } else {
                 error = "Error al ingresar DNI\n";

@@ -9,8 +9,11 @@ import java.awt.event.ActionListener;
 public class CtrlFrameMenu implements ActionListener {
 
     private FrameMenu frameMenu;
+    private double totalPeso;
 
-    public CtrlFrameMenu() {
+    public CtrlFrameMenu(double totalPeso) {
+
+        this.totalPeso = totalPeso;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class CtrlFrameMenu implements ActionListener {
 
         } else if (e.getSource() == frameMenu.getOpcion2()) {
 
-            new FrameEstadisticas(new CtrlFrameEstadisticas());
+            new FrameEstadisticas(new CtrlFrameEstadisticas(totalPeso));
 
         }
     }

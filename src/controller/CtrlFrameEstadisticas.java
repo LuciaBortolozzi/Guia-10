@@ -1,5 +1,6 @@
 package controller;
 
+import model.DAO.EstadisticasJson;
 import model.Donadores;
 import model.Personas;
 import view.FrameEstadisticas;
@@ -12,9 +13,15 @@ import static controller.Controlador.personas;
 public class CtrlFrameEstadisticas {
 
     private FrameEstadisticas vista;
+    private double totalPeso;
 
     public FrameEstadisticas getVista() {
         return vista;
+    }
+
+    public CtrlFrameEstadisticas(double totalPeso) {
+
+        this.totalPeso = totalPeso;
     }
 
     public void setVista(FrameEstadisticas vista) {
@@ -35,6 +42,8 @@ public class CtrlFrameEstadisticas {
         }
 
         vista.getTextCantidadTotExt().setText(String.valueOf(calcularMililitros()));
+
+        consultaPorParametro();
 
     }
 
@@ -78,5 +87,24 @@ public class CtrlFrameEstadisticas {
             }
         }
         return cantidad;
+    }
+
+    public void consultaPorParametro(){
+
+        TreeSet<Personas> personasAux = new TreeSet<Personas>();
+        for (Personas p : personas) {
+
+            if(p instanceof Donadores){
+                for (int i = 0; i < ((Donadores) p).getExtracciones().size(); i++) {
+                    if(((Donadores) p).getExtracciones().get(i).getPesoDonador()!= totalPeso){
+
+                        personasAux.add(p);
+                    }
+                }
+            }
+        }
+
+        EstadisticasJson.grabarJsonStream(personasAux);
+
     }
 }

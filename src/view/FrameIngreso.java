@@ -36,7 +36,7 @@ public class FrameIngreso {
     private JPanel panelDown= new JPanel();
     private JPanel panelMedicina = new JPanel();
 
-    private JTextArea textArea = new JTextArea("Complete con los datos de personas\n" + "sarasa\n" + "sarasa\n");
+    private JTextArea textArea = new JTextArea("Bienvenido al Banco de Sangre Fischer\n" +"Complete el formulario con los datos requeridos\n" + "Indique si la la persona es donador o paciente\n");
 
     private JLabel labelNombre = new JLabel("Nombre");
     private JLabel labelApellido = new JLabel("Apellido");
@@ -131,6 +131,8 @@ public class FrameIngreso {
         }
 
         buttonAceptar.addActionListener(ctrlFrameIngreso);
+
+        buttonAnular.addActionListener(ctrlFrameIngreso);
 
         buttonEditar.addActionListener(ctrlFrameIngreso);
 
@@ -328,6 +330,7 @@ public class FrameIngreso {
             comboLocalidades.setSelectedIndex(0);
             comboProvincias.setSelectedIndex(0);
             comboTiposSangre.setSelectedIndex(0);
+            medsAux.clear();
         }
     }
 
@@ -340,8 +343,8 @@ public class FrameIngreso {
         textInicioTratamiento.setEditable(esEditable);
         radioButtonFem.setEnabled(esEditable);
         radioButtonMasc.setEnabled(esEditable);
-        radioButtonPaciente.setEnabled(!esEditable);
-        radioButtonDonador.setEnabled(!esEditable);
+        radioButtonDonador.setEnabled(false);
+        radioButtonPaciente.setEnabled(false);
         boxSangre.setEnabled(esEditable);
         boxPlaquetas.setEnabled(esEditable);
         boxPlasma.setEnabled(esEditable);
