@@ -19,4 +19,9 @@ public class Validaciones {
 
         return fecha;
     }
+
+    public static Calendar seisMesesAntes(Calendar fechaActual) {
+        fechaActual.add(Calendar.MONTH, -6);
+        return fechaActual;
+    }
 }

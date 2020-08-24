@@ -22,7 +22,7 @@ public class CtrlFrameEstadisticas {
         this.vista = vista;
     }
 
-    public void getEstadisticas(){
+    public void getEstadisticas() {
 
         vista.getTableModel().setRowCount(0);
 
@@ -44,10 +44,9 @@ public class CtrlFrameEstadisticas {
 
         String provincia = "CABA";
 
-
         for (Personas p : personas) {
 
-            if(p.getLocalidad().getProvincia().getNombreProv().equals(provincia)){
+            if (p.getLocalidad().getProvincia().getNombreProv().equals(provincia)) {
 
                 personasAux.add(p);
             }
@@ -56,20 +55,24 @@ public class CtrlFrameEstadisticas {
         return personasAux;
     }
 
-    public  double calcularMililitros(){
+    public double calcularMililitros() {
 
         double cantidad = 0;
 
+        Calendar seisMesesAntes = Calendar.getInstance();
+        Validaciones.seisMesesAntes(seisMesesAntes);
+
         for (Personas p : personas) {
 
-            if(p instanceof Donadores){
-                if( ((Donadores)p).isDonaPlaquetas() && ((Donadores)p).isDonaSangre() && ((Donadores)p).isDonaPlasma()){
+            if (p instanceof Donadores) {
+                if (((Donadores) p).isDonaPlaquetas() && ((Donadores) p).isDonaSangre() && ((Donadores) p).isDonaPlasma()) {
 
-                    for(int i = 0; i<((Donadores)p).getExtracciones().size();i++){
+                    for (int i = 0; i < ((Donadores) p).getExtracciones().size(); i++) {
 
-                        //if de la fecha
+                        if (((Donadores) p).getExtracciones().get(i).getFechaDonacion().after(seisMesesAntes)) {
 
-                        cantidad = cantidad + ((Donadores)p).getExtracciones().get(i).getCantExtraida();
+                            cantidad = cantidad + ((Donadores) p).getExtracciones().get(i).getCantExtraida();
+                        }
                     }
                 }
             }
