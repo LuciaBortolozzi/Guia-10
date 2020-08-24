@@ -52,4 +52,36 @@ public class FrameEstadisticas {
 
 
     }
+
+    public JTable getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(JTable tabla) {
+        this.tabla = tabla;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public JTextField getTextCantidadTotExt() {
+        return textCantidadTotExt;
+    }
+
+    public void setTextCantidadTotExt(JTextField textCantidadTotExt) {
+        this.textCantidadTotExt = textCantidadTotExt;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public void setTableModel(DefaultTableModel tableModel) {
+        this.tableModel = tableModel;
+    }
 }
