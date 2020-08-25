@@ -82,7 +82,7 @@ public abstract class Personas implements Comparable<Personas>{
 
     @Override
     public int compareTo(Personas a) {
-        int lastCmp = this.dni - a.dni;                                     // Primer parametro
-        return (lastCmp != 0 ? lastCmp : apellido.compareTo(a.apellido));   // Segundo parametro
+
+        return this.dni - a.dni;
     }
 }

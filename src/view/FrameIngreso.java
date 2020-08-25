@@ -92,7 +92,7 @@ public class FrameIngreso {
     private boolean ingreso;
 
     public FrameIngreso(CtrlFrameIngreso ctrlFrameIngreso, boolean esIngreso) {
-        ventana.setSize(700, 800);
+        ventana.setSize(700, 750);
         ventana.setIconImage(icon.getImage());
 
         ingreso = esIngreso;
@@ -207,8 +207,6 @@ public class FrameIngreso {
         panelCenterRight.add(panelDonador);
         panelCenterLeft.add(panelDonador2);
 
-        panelDown.setLayout(new GridLayout(2,1));
-
         // Paciente
         panelPaciente.add(labelInicioTratamiento);
         panelPaciente.add(textInicioTratamiento);
@@ -230,8 +228,9 @@ public class FrameIngreso {
         panelMedicina.add(buttonCopiar);
         scrollPaneAux.setViewportView(listMedicamentosAux);
         panelMedicina.add(scrollPaneAux);
-        panelDown.add(panelPaciente);
-        panelDown.add(panelMedicina);
+
+        panelDown.add(panelPaciente, BorderLayout.NORTH);
+        panelDown.add(panelMedicina, BorderLayout.SOUTH);
 
         panelUp.add(panelCenterLeft);
         panelUp.add(panelCenterRight);
