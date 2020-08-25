@@ -5,12 +5,13 @@ import model.TiposSangre;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TiposSangreTXT {
 
-        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    //private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+//        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<TiposSangre> bajarTiposSangreTXT() {
 
@@ -40,7 +41,7 @@ public class TiposSangreTXT {
                 leerArchivoTiposSangre.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e){
             e.printStackTrace();
         }
 

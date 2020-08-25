@@ -41,6 +41,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
             vista.getButtonAceptar().setEnabled(true);
             vista.getButtonCancelar().setEnabled(true);
             vista.getButtonEditar().setVisible(false);
+            vista.getTextDNI().setEnabled(false);
             vista.getRadioButtonDonador().setEnabled(false);
             vista.getRadioButtonPaciente().setEnabled(false);
             vista.getButtonAnular().setVisible(false);
@@ -56,8 +57,8 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
                 PersonasTXT.grabarSetPersonasTXT(personas);
 
                 JOptionPane.showMessageDialog(null, "La persona se elimino correctamente");
+            }
         }
-      }
     }
 
     public void setVista(FrameIngreso vista) {
@@ -70,7 +71,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
         }
 
-        for(Medicamentos med: medicamentos) {
+        for (Medicamentos med : medicamentos) {
             vista.getMeds().addElement(med.getNombreMed());
         }
 

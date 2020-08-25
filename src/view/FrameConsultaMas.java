@@ -55,7 +55,6 @@ public class FrameConsultaMas {
         textResultados.setEditable(false);
         textTotales.setEditable(false);
 
-
         for (int i = 0; i < columnas.length; i++) {
             tableModel.addColumn(columnas[i]);
         }
@@ -125,11 +124,19 @@ public class FrameConsultaMas {
         this.scrollPane = scrollPane;
     }
 
-    public JTextField getTextResultados() { return textResultados; }
+    public JTextField getTextResultados() {
+        return textResultados;
+    }
 
-    public void setTextResultados(JTextField textResultados) { this.textResultados = textResultados; }
+    public void setTextResultados(JTextField textResultados) {
+        this.textResultados = textResultados;
+    }
 
-    public JTextField getTextTotales() { return textTotales; }
+    public JTextField getTextTotales() {
+        return textTotales;
+    }
 
-    public void setTextTotales(JTextField textTotales) { this.textTotales = textTotales; }
+    public void setTextTotales(JTextField textTotales) {
+        this.textTotales = textTotales;
+    }
 }

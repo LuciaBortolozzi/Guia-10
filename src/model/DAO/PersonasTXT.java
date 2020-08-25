@@ -1,6 +1,5 @@
 package model.DAO;
 
-import controller.MedicamentosControlador;
 import controller.PersonasControlador;
 import model.*;
 
@@ -14,8 +13,8 @@ import static controller.Validaciones.convertirAFechaCalendar;
 
 public class PersonasTXT {
 
-    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    //private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static TreeSet<Personas> bajarPersonasTXT(ArrayList<Localidades> localidades, ArrayList<TiposSangre> tiposSangre) {
 
@@ -71,7 +70,7 @@ public class PersonasTXT {
                 leerArchivoPersonas.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e) {
             e.printStackTrace();
         }
 
@@ -144,7 +143,7 @@ public class PersonasTXT {
                 leerArchivoExtracciones.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e) {
             e.printStackTrace();
         }
 
@@ -203,7 +202,7 @@ public class PersonasTXT {
 
             archivoSalida.close();
 
-        } catch (IOException e3) {
+        } catch (IOException e) {
             System.out.println("No se puede grabar el archivo de Personas.txt");
         }
     }
@@ -268,7 +267,7 @@ public class PersonasTXT {
                 archivoSalida.close();
             }
 
-        } catch (IOException e4) {
+        } catch (IOException e) {
             System.out.println("No se puede grabar el archivo de Personas.txt");
         }
     }

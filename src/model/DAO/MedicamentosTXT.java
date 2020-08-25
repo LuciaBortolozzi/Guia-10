@@ -1,6 +1,6 @@
 package model.DAO;
 
-import controller.MedicamentosControlador;
+import controller.Controlador;
 import controller.PersonasControlador;
 import model.Medicamentos;
 import model.Pacientes;
@@ -9,13 +9,14 @@ import model.Personas;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.TreeSet;
 
 public class MedicamentosTXT {
 
-       private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    //private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //       private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Medicamentos> bajarMedicamentosTXT() {
 
@@ -45,7 +46,7 @@ public class MedicamentosTXT {
                 leerArchivoMedicamentos.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e) {
             e.printStackTrace();
         }
 
@@ -87,7 +88,7 @@ public class MedicamentosTXT {
                     if (persona instanceof Pacientes) {
                         if (documento == dniPaciente) {
 
-                            medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT, idMed);
+                            medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
 
                             if (medicamento != null) {
                                 medicamentos.add(medicamento);
@@ -99,13 +100,13 @@ public class MedicamentosTXT {
                             medicamentos.clear();
                             persona = PersonasControlador.buscarPersona(dniPaciente);
 
-                            if (persona != null && persona instanceof Pacientes) {
+                            if (persona instanceof Pacientes) {
 
                                 documento = dniPaciente;
 
                                 if (documento == dniPaciente) {
 
-                                    medicamento = MedicamentosControlador.agregarMedicamentos(medicamentosTXT, idMed);
+                                    medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
 
                                     if (medicamento != null) {
 
@@ -124,7 +125,7 @@ public class MedicamentosTXT {
                 leerArchivoMedicamentos.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e) {
             e.printStackTrace();
         }
 

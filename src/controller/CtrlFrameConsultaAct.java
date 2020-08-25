@@ -11,7 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Iterator;
 
-import static controller.Controlador.personasAux;
+import static controller.Controlador.personas;
 import static controller.PersonasControlador.mostrarPersona;
 
 public class CtrlFrameConsultaAct implements ActionListener, ItemListener {
@@ -42,7 +42,7 @@ public class CtrlFrameConsultaAct implements ActionListener, ItemListener {
         try {
             int dni = Integer.parseInt(vista.getTextDNI().getText());
 
-            Iterator<Personas> iteratorPersonas = personasAux.iterator();
+            Iterator<Personas> iteratorPersonas = personas.iterator();
             while (iteratorPersonas.hasNext()) {
                 persona = iteratorPersonas.next();
                 if (persona.getDni() == dni) {

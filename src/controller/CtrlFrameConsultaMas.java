@@ -31,9 +31,9 @@ public class CtrlFrameConsultaMas implements ActionListener {
             for (Personas pers : personasAux) {
                 Object[] row = {pers.getDni(), pers.getNombre(),
                         pers.getApellido(), pers.getLocalidad().getNombreLoc(),
-                        String.format("%02d",pers.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
-                        String.format("%02d",(pers.getFechaNac().get(Calendar.MONTH)+1)) + "/" +
-                        pers.getFechaNac().get(Calendar.YEAR), pers.getSexo()};
+                        String.format("%02d", pers.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                                String.format("%02d", (pers.getFechaNac().get(Calendar.MONTH) + 1)) + "/" +
+                                pers.getFechaNac().get(Calendar.YEAR), pers.getSexo()};
                 vista.getTableModel().addRow(row);
             }
 
