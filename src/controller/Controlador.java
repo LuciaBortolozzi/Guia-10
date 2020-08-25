@@ -4,6 +4,7 @@ import model.*;
 import model.DAO.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -81,5 +82,20 @@ public class Controlador {
             tiposSangresST.add(tipo.getGrupo() + "-RH" + tipo.getFactor());
         }
         return tiposSangresST;
+    }
+
+    public static Medicamentos agregarMedicamentos(ArrayList<Medicamentos> medicamentos, int idMed) {
+
+        Medicamentos medicamento = null;
+
+        Iterator<Medicamentos> hosp = medicamentos.iterator();
+        while (hosp.hasNext()) {
+            medicamento = hosp.next();
+
+            if (medicamento.getIdMed() == idMed) {
+                break;
+            }
+        }
+        return medicamento;
     }
 }

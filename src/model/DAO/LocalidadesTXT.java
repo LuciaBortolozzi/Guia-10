@@ -6,13 +6,14 @@ import model.Provincias;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class LocalidadesTXT {
 
-        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
-    // private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //        private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Localidades> bajarLocalidadesTXT(ArrayList<Provincias> provincias) {
 
@@ -46,7 +47,7 @@ public class LocalidadesTXT {
                 leerArchivoLocalidades.close();
             }
 
-        } catch (IOException e) {
+        } catch (InputMismatchException | IOException e) {
             e.printStackTrace();
         }
 

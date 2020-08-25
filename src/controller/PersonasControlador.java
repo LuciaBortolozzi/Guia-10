@@ -54,11 +54,13 @@ public class PersonasControlador {
             if (dni > 5000000) {
 
                 // Validar con excepcion propia si ya existe la persona
-                Personas persona = buscarPersona(dni);
+                if (vista.esIngreso()) {
 
-                if(persona != null){
+                    Personas persona = buscarPersona(dni);
 
-                  throw new PersonaExistente(dni);
+                    if (persona != null) {
+                        throw new PersonaExistente(dni);
+                    }
                 }
 
             } else {
@@ -101,11 +103,9 @@ public class PersonasControlador {
             }
 
             String localidadST = vista.getComboLocalidades().getSelectedItem().toString();
-//            String localidadST = Objects.requireNonNull(vista.getComboLocalidades().getSelectedItem()).toString();
             Localidades localidad = Controlador.buscarLocalidad(localidadST);
 
             String tipoSangreST = vista.getComboTiposSangre().getSelectedItem().toString();
-//            String tipoSangreST = Objects.requireNonNull(vista.getComboTiposSangre().getSelectedItem()).toString();
             TiposSangre tipoSangre = Controlador.buscarTipoSangre(tipoSangreST);
 
 
@@ -116,8 +116,6 @@ public class PersonasControlador {
                 donaPlasma = vista.getBoxPlasma().isSelected();
 
                 donaSangre = vista.getBoxSangre().isSelected();
-
-                // Extracciones
 
                 Personas persona = new Donadores(nombreST, apellidoST, dni, localidad, fechaNac, sexo, tipoSangre, donaSangre, donaPlaquetas, donaPlasma);
 
@@ -131,7 +129,6 @@ public class PersonasControlador {
                     PersonasControlador.modificarPersona(persona);
 
                 }
-
 
             } else if (vista.getRadioButtonPaciente().isSelected()) {
 
@@ -203,6 +200,19 @@ public class PersonasControlador {
                 personaAux.setLocalidad(persona.getLocalidad());
                 personaAux.setSexo(persona.getSexo());
 
+                if (personaAux instanceof Donadores) {
+
+                    ((Donadores) personaAux).setDonaPlaquetas(((Donadores) persona).isDonaPlaquetas());
+                    ((Donadores) personaAux).setDonaPlasma(((Donadores) persona).isDonaPlasma());
+                    ((Donadores) personaAux).setDonaSangre(((Donadores) persona).isDonaSangre());
+
+                } else if (personaAux instanceof Pacientes) {
+
+                    ((Pacientes) personaAux).setInicioTratamiento(((Pacientes) persona).getInicioTratamiento());
+                    ((Pacientes) personaAux).setEnfermedad(((Pacientes) persona).getEnfermedad());
+                    ((Pacientes) personaAux).setMedicamentos(((Pacientes) persona).getMedicamentos());
+
+                }
                 break;
             }
         }

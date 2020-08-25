@@ -89,14 +89,14 @@ public class CtrlFrameEstadisticas {
         return cantidad;
     }
 
-    public void consultaPorParametro(){
+    public void consultaPorParametro() {
 
         TreeSet<Personas> personasAux = new TreeSet<Personas>();
         for (Personas p : personas) {
 
-            if(p instanceof Donadores){
+            if (p instanceof Donadores) {
                 for (int i = 0; i < ((Donadores) p).getExtracciones().size(); i++) {
-                    if(((Donadores) p).getExtracciones().get(i).getPesoDonador()!= totalPeso){
+                    if (((Donadores) p).getExtracciones().get(i).getPesoDonador() != totalPeso) {
 
                         personasAux.add(p);
                     }

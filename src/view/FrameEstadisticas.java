@@ -49,8 +49,6 @@ public class FrameEstadisticas {
 
         ctrlFrameEstadisticas.getEstadisticas();
 
-
-
     }
 
     public JTable getTabla() {
