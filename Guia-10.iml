@@ -20,12 +20,21 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../OneDrive/USAL/Programación Avanzada/javax.json-1.1.jar!/" />
+          <root url="jar://$USER_HOME$/OneDrive/USAL/Programación Avanzada/javax.json-1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="library" name="javax.json-1.01" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/OneDrive/USAL/Programación Avanzada/javax.json-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -15,8 +15,8 @@ import java.util.TreeSet;
 
 public class MedicamentosTXT {
 
-    //       private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+           private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //  private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Medicamentos> bajarMedicamentosTXT() {
 
@@ -104,14 +104,11 @@ public class MedicamentosTXT {
 
                                 documento = dniPaciente;
 
-                                if (documento == dniPaciente) {
+                                medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
 
-                                    medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
+                                if (medicamento != null) {
 
-                                    if (medicamento != null) {
-
-                                        medicamentos.add(medicamento);
-                                    }
+                                    medicamentos.add(medicamento);
                                 }
                             }
                         }
