@@ -10,6 +10,8 @@ public class FrameEstadisticas {
     private CtrlFrameEstadisticas ctrlFrameEstadisticas;
 
     private JFrame ventana = new JFrame("Estadisticas");
+    private JPanel panelIzq = new JPanel();
+    private JPanel panelDer = new JPanel();
     private ImageIcon icon = new ImageIcon("src/resources/blood-donation-1.png");
     private JPanel panelEstadistica0 = new JPanel(new FlowLayout());
     private JPanel panelEstadistica1 = new JPanel(new FlowLayout());
@@ -17,11 +19,11 @@ public class FrameEstadisticas {
     private JPanel panelEstadistica3 = new JPanel(new FlowLayout());
     private JPanel panelEstadistica4 = new JPanel(new FlowLayout());
     private JLabel labelProvincia = new JLabel("En CABA:");
-    private String[] columnas = {"Nombre", "Apellido", "DNI", "Tipo Sangre"};
+    private String[] columnas = {"DNI", "Nombre", "Apellido", "Tipo Sangre"};
     private DefaultTableModel tableModel = new DefaultTableModel();
     private JTable tabla = new JTable(tableModel);
     private JScrollPane scrollPane = new JScrollPane(tabla);
-    private String[] columnas2 = {"Nombre", "Apellido", "DNI", "Fecha Nacimiento"};
+    private String[] columnas2 = {"DNI", "Nombre", "Apellido", "Fecha Nacimiento"};
     private DefaultTableModel tableModel2 = new DefaultTableModel();
     private JTable tabla2 = new JTable(tableModel2);
     private JScrollPane scrollPane2 = new JScrollPane(tabla2);
@@ -35,9 +37,10 @@ public class FrameEstadisticas {
         ctrlFrameEstadisticas.setVista(this);
 
         ventana.setIconImage(icon.getImage());
-        ventana.setSize(550, 1100);
+        ventana.setSize(625, 1000);
         ventana.setLayout(new FlowLayout());
         ventana.setLocationRelativeTo(null);
+        ventana.setResizable(false);
         ventana.setVisible(true);
 
         panelEstadistica0.add(labelProvincia);
@@ -60,11 +63,16 @@ public class FrameEstadisticas {
         }
         panelEstadistica4.add(scrollPane2);
 
-        ventana.add(panelEstadistica0);
-        ventana.add(panelEstadistica1);
-        ventana.add(panelEstadistica2);
-        ventana.add(panelEstadistica3);
-        ventana.add(panelEstadistica4);
+        panelIzq.setLayout(new BoxLayout(panelIzq, BoxLayout.Y_AXIS));
+        panelIzq.add(panelEstadistica0);
+        panelIzq.add(panelEstadistica1);
+
+        panelDer.setLayout(new BoxLayout(panelDer, BoxLayout.Y_AXIS));
+        panelDer.add(panelEstadistica3);
+        panelDer.add(panelEstadistica4);
+        panelDer.add(panelEstadistica2);
+        ventana.add(panelIzq);
+        ventana.add(panelDer);
 
         ctrlFrameEstadisticas.getEstadisticas();
 
@@ -102,15 +110,27 @@ public class FrameEstadisticas {
         this.tableModel = tableModel;
     }
 
-    public DefaultTableModel getTableModel2() { return tableModel2; }
+    public DefaultTableModel getTableModel2() {
+        return tableModel2;
+    }
 
-    public void setTableModel2(DefaultTableModel tableModel2) { this.tableModel2 = tableModel2; }
+    public void setTableModel2(DefaultTableModel tableModel2) {
+        this.tableModel2 = tableModel2;
+    }
 
-    public JTable getTabla2() { return tabla2; }
+    public JTable getTabla2() {
+        return tabla2;
+    }
 
-    public void setTabla2(JTable tabla2) { this.tabla2 = tabla2; }
+    public void setTabla2(JTable tabla2) {
+        this.tabla2 = tabla2;
+    }
 
-    public JTextField getTextPeso() { return textPeso; }
+    public JTextField getTextPeso() {
+        return textPeso;
+    }
 
-    public void setTextPeso(JTextField textPeso) { this.textPeso = textPeso; }
+    public void setTextPeso(JTextField textPeso) {
+        this.textPeso = textPeso;
+    }
 }
