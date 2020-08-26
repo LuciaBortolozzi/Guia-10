@@ -124,7 +124,7 @@ public class PersonasTXT {
 
                     String[] extraccionST = s.split(";");
 
-                    int dniPaciente = Integer.parseInt(extraccionST[0].trim());
+                    int dniDonador = Integer.parseInt(extraccionST[0].trim());
                     int nroExtraccion = Integer.parseInt(extraccionST[1].trim());
                     Calendar fechaDonacion = convertirAFechaCalendar(extraccionST[2].trim());
                     double pesoDonador = Double.parseDouble(extraccionST[3].trim());
@@ -133,7 +133,7 @@ public class PersonasTXT {
                     double recuentoGlobulosRojos = Double.parseDouble(extraccionST[6].trim());
                     double cantExtraida = Double.parseDouble(extraccionST[7].trim());
 
-                    Personas persona = PersonasControlador.buscarPersona(dniPaciente);
+                    Personas persona = PersonasControlador.buscarPersona(dniDonador);
                     if (persona instanceof Donadores) {
                         ((Donadores) persona).setExtracciones(nroExtraccion, fechaDonacion, pesoDonador, pudoDonar, presion, recuentoGlobulosRojos, cantExtraida);
                     }
