@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class LocalidadesTXT {
 
-//            private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
-     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+          private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\";
+    //     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Localidades> bajarLocalidadesTXT(ArrayList<Provincias> provincias) {
 

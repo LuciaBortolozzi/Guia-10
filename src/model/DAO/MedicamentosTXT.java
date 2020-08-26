@@ -2,21 +2,20 @@ package model.DAO;
 
 import controller.Controlador;
 import controller.PersonasControlador;
+import model.Donadores;
 import model.Medicamentos;
 import model.Pacientes;
 import model.Personas;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.io.PrintWriter;
+import java.util.*;
 
 public class MedicamentosTXT {
 
-//           private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-      private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+          private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //      private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
     public static ArrayList<Medicamentos> bajarMedicamentosTXT() {
 
@@ -127,6 +126,35 @@ public class MedicamentosTXT {
         }
 
         return personasTXT;
+    }
+
+    public static void grabarPacientesPedicamentosTXT(TreeSet<Personas> personasTXT){
+
+        try {
+            File fichero = new File(directorio + "PacientesMedicamentos.txt");
+
+            if (fichero.exists()) {
+                PrintWriter archivoSalida = new PrintWriter(fichero);
+
+                Personas persona;
+                Iterator<Personas> per = personasTXT.iterator();
+                while (per.hasNext()) {
+                    persona = per.next();
+
+                    if(persona instanceof Pacientes){
+
+                        for(Medicamentos med : ((Pacientes)persona).getMedicamentos()){
+
+                            archivoSalida.println(persona.getDni() + "" + String.format("%010d",med.getIdMed()));
+                        }
+                    }
+                }
+                archivoSalida.close();
+            }
+
+        } catch (IOException e) {
+            System.out.println("No se puede grabar el archivo de PacientesMedicamentos.txt");
+        }
     }
 
 }
