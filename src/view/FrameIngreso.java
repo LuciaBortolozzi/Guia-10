@@ -175,6 +175,7 @@ public class FrameIngreso {
 
         panelDNI.setLayout(new GridLayout(2,1));
         panelDNI.add(labelDNI);
+        textDNI.setToolTipText("Sin puntos");
         panelDNI.add(textDNI);
         panelCenterLeft.add(panelDNI);
 
@@ -184,6 +185,7 @@ public class FrameIngreso {
 
         panelNacimiento.setLayout(new GridLayout(2,1));
         panelNacimiento.add(labelFechaNac);
+        textFechaNac.setToolTipText("DDMMYY");
         panelNacimiento.add(textFechaNac);
         panelCenterLeft.add(panelNacimiento);
 
@@ -209,6 +211,7 @@ public class FrameIngreso {
 
         // Paciente
         panelPaciente.add(labelInicioTratamiento);
+        textInicioTratamiento.setToolTipText("DDMMYY");
         panelPaciente.add(textInicioTratamiento);
         panelPaciente.add(labelEnfermedad);
         panelPaciente.add(textEnfermedad);
