@@ -43,8 +43,16 @@ public class CtrlFrameEstadisticas {
 
         vista.getTextCantidadTotExt().setText(String.valueOf(calcularMililitros()));
 
-        consultaPorParametro();
+        TreeSet<Personas> personasAux2 =consultaPorParametro();
 
+        for (Personas pers : personasAux2) {
+            Object[] row = {pers.getNombre(),
+                    pers.getApellido(), pers.getDni(), pers.getFechaNac().get(Calendar.DAY_OF_MONTH) + "/" + (pers.getFechaNac().get(Calendar.MONTH)+1)
+                    + "/" + pers.getFechaNac().get(Calendar.YEAR)};
+            vista.getTableModel2().addRow(row);
+        }
+
+        vista.getTextPeso().setText(String.valueOf(totalPeso));
     }
 
     public TreeSet<Personas> consultaPersonas() {
@@ -89,7 +97,7 @@ public class CtrlFrameEstadisticas {
         return cantidad;
     }
 
-    public void consultaPorParametro() {
+    public TreeSet<Personas> consultaPorParametro() {
 
         TreeSet<Personas> personasAux = new TreeSet<Personas>();
         for (Personas p : personas) {
@@ -105,6 +113,6 @@ public class CtrlFrameEstadisticas {
         }
 
         EstadisticasJson.grabarJsonStream(personasAux);
-
+        return personasAux;
     }
 }
