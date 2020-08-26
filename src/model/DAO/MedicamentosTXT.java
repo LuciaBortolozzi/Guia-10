@@ -1,8 +1,6 @@
 package model.DAO;
 
 import controller.Controlador;
-import controller.PersonasControlador;
-import model.Donadores;
 import model.Medicamentos;
 import model.Pacientes;
 import model.Personas;
@@ -14,8 +12,9 @@ import java.util.*;
 
 public class MedicamentosTXT {
 
-          private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
-    //      private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    //           private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+    private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+
 
     public static ArrayList<Medicamentos> bajarMedicamentosTXT() {
 
@@ -55,8 +54,6 @@ public class MedicamentosTXT {
 
     public static TreeSet<Personas> bajarPacientesMedicamentosTXT(TreeSet<Personas> personasTXT, ArrayList<Medicamentos> medicamentosTXT) {
 
-        ArrayList<Medicamentos> medicamentos = new ArrayList<Medicamentos>();
-
         try {
             File archivo = new File(directorio + "PacientesMedicamentos.txt");
             if (archivo.exists()) {
@@ -68,54 +65,29 @@ public class MedicamentosTXT {
                     medicamentosST.add(lineaActual);
                 }
 
-                boolean primeraVez = true;
-                int documento = 0;
-                Personas persona = null;
                 Medicamentos medicamento;
 
-                for (String s : medicamentosST) {
+                Personas persona;
+                Iterator<Personas> iteratorPersonas = personasTXT.iterator();
+                while (iteratorPersonas.hasNext()) {
+                    persona = iteratorPersonas.next();
 
-                    int dniPaciente = Integer.parseInt(s.substring(0, 8).trim());
-                    int idMed = Integer.parseInt(s.substring(8, 18).trim());
-
-                    if (primeraVez) {
-                        persona = PersonasControlador.buscarPersona(dniPaciente);
-                        documento = dniPaciente;
-                        primeraVez = false;
-                    }
-
+                    ArrayList<Medicamentos> medicamentosAux = new ArrayList<Medicamentos>();
                     if (persona instanceof Pacientes) {
-                        if (documento == dniPaciente) {
 
-                            medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
+                        for (String s : medicamentosST) {
 
-                            if (medicamento != null) {
-                                medicamentos.add(medicamento);
-                            }
+                            int dniPaciente = Integer.parseInt(s.substring(0, 8).trim());
+                            int idMed = Integer.parseInt(s.substring(8, 18).trim());
 
-                        } else {
-
-                            ((Pacientes) persona).setMedicamentos(medicamentos);
-                            medicamentos.clear();
-                            persona = PersonasControlador.buscarPersona(dniPaciente);
-
-                            if (persona instanceof Pacientes) {
-
-                                documento = dniPaciente;
-
+                            if (persona.getDni() == dniPaciente) {
                                 medicamento = Controlador.agregarMedicamentos(medicamentosTXT, idMed);
-
-                                if (medicamento != null) {
-
-                                    medicamentos.add(medicamento);
-                                }
+                                medicamentosAux.add(medicamento);
                             }
                         }
-                    }
-                }
+                        ((Pacientes) persona).setMedicamentos(medicamentosAux);
 
-                if (persona instanceof Pacientes) {
-                    ((Pacientes) persona).setMedicamentos(medicamentos);
+                    }
                 }
 
                 leerArchivoMedicamentos.close();
