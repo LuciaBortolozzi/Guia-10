@@ -127,6 +127,7 @@ public class PersonasControlador {
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
+                    PersonasTXT.grabarSetPersonasTXT(personas);
 
                 }
 
@@ -172,6 +173,7 @@ public class PersonasControlador {
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
+                    PersonasTXT.grabarSetPersonasTXT(personas);
 
                 }
 

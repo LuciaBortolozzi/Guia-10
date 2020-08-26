@@ -36,18 +36,19 @@ public class CtrlFrameEstadisticas {
         TreeSet<Personas> personasAux = consultaPersonas();
 
         for (Personas pers : personasAux) {
-            Object[] row = {pers.getNombre(),
-                    pers.getApellido(), pers.getDni(), pers.getTipoSangre().getGrupo() + pers.getTipoSangre().getFactor()};
+            Object[] row = {pers.getDni(), pers.getNombre(),
+                    pers.getApellido(), pers.getTipoSangre().getGrupo() + pers.getTipoSangre().getFactor()};
             vista.getTableModel().addRow(row);
         }
 
         vista.getTextCantidadTotExt().setText(String.valueOf(calcularMililitros()));
 
-        TreeSet<Personas> personasAux2 =consultaPorParametro();
+        TreeSet<Personas> personasAux2 = consultaPorParametro();
 
         for (Personas pers : personasAux2) {
-            Object[] row = {pers.getNombre(),
-                    pers.getApellido(), pers.getDni(), pers.getFechaNac().get(Calendar.DAY_OF_MONTH) + "/" + (pers.getFechaNac().get(Calendar.MONTH)+1)
+            Object[] row = {pers.getDni(), pers.getNombre(),
+                    pers.getApellido(), String.format("%02d", pers.getFechaNac().get(Calendar.DAY_OF_MONTH)) + "/" +
+                    String.format("%02d", (pers.getFechaNac().get(Calendar.MONTH) + 1))
                     + "/" + pers.getFechaNac().get(Calendar.YEAR)};
             vista.getTableModel2().addRow(row);
         }
