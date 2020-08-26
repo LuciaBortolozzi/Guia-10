@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import model.DAO.MedicamentosTXT;
 import model.DAO.PersonasTXT;
 import view.FrameIngreso;
 
@@ -123,11 +124,13 @@ public class PersonasControlador {
 
                     personas.add(persona);
                     PersonasTXT.grabarPersonaTXT(persona);
+                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
 
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
                     PersonasTXT.grabarSetPersonasTXT(personas);
+                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
 
                 }
 
@@ -169,11 +172,13 @@ public class PersonasControlador {
 
                     personas.add(persona);
                     PersonasTXT.grabarPersonaTXT(persona);
+                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
 
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
                     PersonasTXT.grabarSetPersonasTXT(personas);
+                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
 
                 }
 
