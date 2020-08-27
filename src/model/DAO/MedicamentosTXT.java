@@ -12,7 +12,7 @@ import java.util.*;
 
 public class MedicamentosTXT {
 
-    //           private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
+//    private static final String directorio = "C:\\\\Users\\\\Flor\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
     private static final String directorio = "D:\\\\IdeaProjects\\\\Guia-10\\\\src\\\\resources\\\\";
 
 
@@ -100,7 +100,7 @@ public class MedicamentosTXT {
         return personasTXT;
     }
 
-    public static void grabarPacientesPedicamentosTXT(TreeSet<Personas> personasTXT){
+    public static void grabarPacientesMedicamentosTXT(TreeSet<Personas> personasTXT) {
 
         try {
             File fichero = new File(directorio + "PacientesMedicamentos.txt");
@@ -113,11 +113,11 @@ public class MedicamentosTXT {
                 while (per.hasNext()) {
                     persona = per.next();
 
-                    if(persona instanceof Pacientes){
+                    if (persona instanceof Pacientes) {
 
-                        for(Medicamentos med : ((Pacientes)persona).getMedicamentos()){
+                        for (Medicamentos med : ((Pacientes) persona).getMedicamentos()) {
 
-                            archivoSalida.println(persona.getDni() + "" + String.format("%010d",med.getIdMed()));
+                            archivoSalida.println(persona.getDni() + "" + String.format("%010d", med.getIdMed()));
                         }
                     }
                 }
