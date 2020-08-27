@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import model.DAO.MedicamentosTXT;
 import model.DAO.PersonasTXT;
 import view.FrameIngreso;
 
@@ -24,11 +25,6 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
         if (e.getSource() == vista.getButtonAceptar()) {
 
             agregarPersona(vista);
-            if (vista.esIngreso()) {
-                JOptionPane.showMessageDialog(null, "La persona se ingreso correctamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "La persona se modifico correctamente");
-            }
             vista.limpiar(false);
 
         } else if (e.getSource() == vista.getButtonCopiar()) {
@@ -59,7 +55,7 @@ public class CtrlFrameIngreso implements ActionListener, ItemListener {
 
                 eliminarPersona(dni);
                 PersonasTXT.grabarSetPersonasTXT(personas);
-
+                MedicamentosTXT.grabarPacientesMedicamentosTXT(personas);
                 JOptionPane.showMessageDialog(null, "La persona se elimino correctamente");
             }
             vista.limpiar(false);

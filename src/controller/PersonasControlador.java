@@ -123,14 +123,16 @@ public class PersonasControlador {
                 if (vista.esIngreso()) {
 
                     personas.add(persona);
+                    JOptionPane.showMessageDialog(null, "La persona se ingreso correctamente");
                     PersonasTXT.grabarPersonaTXT(persona);
-                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
+                    MedicamentosTXT.grabarPacientesMedicamentosTXT(personas);
 
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
+                    JOptionPane.showMessageDialog(null, "La persona se modifico correctamente");
                     PersonasTXT.grabarSetPersonasTXT(personas);
-                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
+                    MedicamentosTXT.grabarPacientesMedicamentosTXT(personas);
 
                 }
 
@@ -171,14 +173,16 @@ public class PersonasControlador {
                 if (vista.esIngreso()) {
 
                     personas.add(persona);
+                    JOptionPane.showMessageDialog(null, "La persona se ingreso correctamente");
                     PersonasTXT.grabarPersonaTXT(persona);
-                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
+                    MedicamentosTXT.grabarPacientesMedicamentosTXT(personas);
 
                 } else {
 
                     PersonasControlador.modificarPersona(persona);
+                    JOptionPane.showMessageDialog(null, "La persona se modifico correctamente");
                     PersonasTXT.grabarSetPersonasTXT(personas);
-                    MedicamentosTXT.grabarPacientesPedicamentosTXT(personas);
+                    MedicamentosTXT.grabarPacientesMedicamentosTXT(personas);
 
                 }
 
